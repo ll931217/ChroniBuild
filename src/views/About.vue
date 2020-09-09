@@ -1,5 +1,5 @@
-<template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+<template lang="pug">
+  #about
+    h1.title.is-1.has-text-white About
+    p This is an about page
 </template>

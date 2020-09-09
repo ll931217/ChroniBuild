@@ -1,0 +1,20 @@
+<template lang="pug">
+#navbar
+  b-navbar(:transparent="true")
+    template(slot="brand")
+      b-navbar-item(tag="router-link", :to="{ name: 'Home' }")
+        img(src="../assets/images/logo.png")
+    template(slot="start", :centered="true")
+      b-navbar-item(tag="router-link", :to="{ name: 'Home' }").has-text-white Home
+      b-navbar-item(tag="router-link", :to="{ name: 'Items' }").has-text-white Items
+      b-navbar-item(tag="router-link", :to="{ name: 'Runes' }").has-text-white Runes
+      b-navbar-item(tag="router-link", :to="{ name: 'About' }").has-text-white About
+</template>
+
+<style lang="sass" scoped>
+.navbar
+  background-image: url('../assets/images/Tiled_brick.jpg')
+  background-repeat: repeat
+  background-size: 100px 100px
+  box-shadow: 1px 1px 5px 2px black
+</style>

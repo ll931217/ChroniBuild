@@ -1,5 +1,6 @@
 <template lang="pug">
-h1 Hello
+#home
+  h1.title.is-1.has-text-white Hello
 </template>
 
 <script>

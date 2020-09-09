@@ -1,15 +1,7 @@
 <template lang="pug">
 #app
+  Navbar
   .container
-    b-navbar
-      template(slot="brand")
-        b-navbar-item(tag="router-link", :to="{ name: 'home' }")
-          img(src="./assets/logo.png")
-      template(slot="start")
-        b-navbar-item(tag="router-link", :to="{ name: 'home' }") Home
-        b-navbar-item(:to="{ name: 'items' }") Items
-        b-navbar-item(:to="{ name: 'runes' }") Runes
-        b-navbar-item(:to="{ name: 'About' }") About
     main
       router-view
     footer
@@ -24,9 +16,12 @@ export default {
     tree: {},
   }),
   async created() {
-    const skillData = await import('@/assets/skilldatas/skilldata_1.00.4.json');
+    const skillData = await import('@/assets/skilldata.json');
     this.gameVersion = skillData.version;
     this.tree = skillData.tree;
+  },
+  components: {
+    Navbar: () => import('@/components/Navbar.vue'),
   },
 };
 </script>
