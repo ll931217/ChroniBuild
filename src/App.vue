@@ -1,11 +1,13 @@
 <template lang="pug">
 #app
-  Navbar
   .container
+    Navbar
     main
       router-view
     footer
       p Game Version: {{ gameVersion }}
+        span By&nbsp;
+          a(href="https://ll931217.github.io/") Liang-Shih Lin
 </template>
 
 <script>
@@ -37,6 +39,10 @@ body, html
   background-repeat: no-repeat
   background-size: cover
   color: white
+
+footer
+  span
+    float: right
 
 @font-face
   font-family: 'Arcade Classic'
