@@ -5,11 +5,47 @@
       b-navbar-item(tag="router-link", :to="{ name: 'Home' }")
         img(src="../assets/images/logo.png")
     template(slot="start", :centered="true")
-      b-navbar-item(tag="router-link", :to="{ name: 'Home' }").has-text-white Home
-      b-navbar-item(tag="router-link", :to="{ name: 'Items' }").has-text-white Items
-      b-navbar-item(tag="router-link", :to="{ name: 'Runes' }").has-text-white Runes
-      b-navbar-item(tag="router-link", :to="{ name: 'About' }").has-text-white About
+      b-navbar-item(
+        tag="router-link",
+        :to="{ name: 'Home' }",
+        @mouseover.native="hoverSound()",
+        @click.native="selectSound()"
+      ).has-text-white Home
+      b-navbar-item(
+        tag="router-link",
+        :to="{ name: 'Items' }",
+        @mouseover.native="hoverSound()",
+        @click.native="selectSound()"
+      ).has-text-white Items
+      b-navbar-item(
+        tag="router-link",
+        :to="{ name: 'Runes' }",
+        @mouseover.native="hoverSound()",
+        @click.native="selectSound()"
+      ).has-text-white Runes
+      b-navbar-item(
+        tag="router-link",
+        :to="{ name: 'About' }",
+        @mouseover.native="hoverSound()",
+        @click.native="selectSound()"
+      ).has-text-white About
 </template>
+
+<script>
+export default {
+  name: 'Navbar',
+  props: {
+    hoverSound: {
+      type: Function,
+      default: () => {},
+    },
+    selectSound: {
+      type: Function,
+      default: () => {},
+    },
+  },
+};
+</script>
 
 <style lang="sass">
 @import "~bulma/sass/utilities/_all"
