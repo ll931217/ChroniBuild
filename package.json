@@ -9,6 +9,7 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
+    "@ll931217/vue-treeview": "../vue-treeview/master",
     "buefy": "^0.9.3",
     "core-js": "^3.6.5",
     "pug-plain-loader": "^1.0.0",

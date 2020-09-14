@@ -18,6 +18,14 @@ const routes = [
     path: '/runes',
     name: 'Runes',
     component: () => import(/* webpackChunkName: "runes" */ '../views/Runes.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Rune',
+        component: () => import(/* webpackChunkName: "about" */ '../views/ViewRune.vue'),
+        props: (route) => ({ image: route.query.image }),
+      },
+    ],
   },
   {
     path: '/about',

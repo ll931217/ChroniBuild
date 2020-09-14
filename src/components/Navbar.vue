@@ -51,10 +51,6 @@ export default {
 @import "~bulma/sass/utilities/_all"
 
 .navbar
-  background-image: url('../assets/images/Tiled_brick.jpg')
-  background-repeat: repeat
-  background-size: 100px 100px
-  box-shadow: 1px 1px 5px 2px black
 
   .navbar-menu
     .navbar-start
