@@ -12,34 +12,38 @@ const url = 'https://chronicon.fandom.com/wiki/True_Legendary_Items';
   const { data: html } = await axios.get(url);
   const $ = cheerio.load(html);
 
-  const children = $('section#WikiaPage .WikiaPageContentWrapper article#WikiaMainContent #WikiaMainContentContainer #WikiaArticle #mw-content-text.mw-content-ltr.mw-content-text').children()
-  const tree = []
+  const children = $('section#WikiaPage .WikiaPageContentWrapper article#WikiaMainContent #WikiaMainContentContainer #WikiaArticle #mw-content-text.mw-content-ltr.mw-content-text').children();
+  const tree = [];
 
-  let index = 0
-  children.not('figure,noscript,#incontent_player.gpt-ad,p,nav').each(function() {
+  let index = 0;
+  children.not('figure,noscript,#incontent_player.gpt-ad,p,nav').each(function itemContents() {
     if ($(this).is('h2')) {
       if (tree.length > index) {
-        index++
+        index++;
       }
-      tree.push({ text: $(this).find('span.mw-headline').text().trim(), nodes: [] })
+      tree.push({ text: $(this).find('span.mw-headline').text().trim(), nodes: [] });
     } else if ($(this).is('h3')) {
-      tree[index]['nodes'].push({ text: ($(this).find('span.mw-headline').text().trim()).replace('-', ''), nodes: [] })
+      tree[index].nodes.push({
+        text: ($(this).find('span.mw-headline').text().trim())
+          .replace('-', ''),
+        nodes: [],
+      });
     } else {
-      $(this).find('li').each(function() {
+      $(this).find('li').each(function listItems() {
         if ($(this).text() !== '' || $(this).find('a').text() !== '') {
-          const text = $(this).text() !== '' ? $(this).text().trim() : $(this).find('a').text().trim()
-          const url = $(this).find('a').attr('href') ? 'https://chronicon.fandom.com' + $(this).find('a').attr('href') : ''
+          const text = $(this).text() !== '' ? $(this).text().trim() : $(this).find('a').text().trim();
+          const value = $(this).find('a').attr('href') ? `https://chronicon.fandom.com${$(this).find('a').attr('href')}` : '';
 
-          if (tree[index]['nodes'].length > 0 && tree[index]['nodes'][0].hasOwnProperty('nodes')) {
-            tree[index]['nodes'][tree[index]['nodes'].length - 1]['nodes'].push({ text, value: url })
+          if (tree[index].nodes.length > 0 && Object.prototype.hasOwnProperty.call(tree[index].nodes[0], 'nodes')) {
+            tree[index].nodes[tree[index].nodes.length - 1].nodes.push({ text, value });
           } else {
-            tree[index]['nodes'].push({ text, value: url })
+            tree[index].nodes.push({ text, value });
           }
         }
-      })
+      });
     }
-  })
+  });
 
-  await fs.writeFile(path.normalize('./items.json'), JSON.stringify(tree, null, 2))
-  console.log(util.inspect(tree, { color: true, depth: 6 }))
+  await fs.writeFile(path.normalize('./items.json'), JSON.stringify(tree, null, 2));
+  console.log(util.inspect(tree, { color: true, depth: 6 }));
 })();

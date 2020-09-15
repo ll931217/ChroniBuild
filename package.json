@@ -2,14 +2,13 @@
   "name": "chronibuild",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "scraper/items": "nodemon --exec 'node --experimental-json-modules ./tools/items_scraper.js' --watch ./tools/items_scraper.js",
-    "scraper/runes": "nodemon --exec 'node --experimental-json-modules ./tools/runes_scraper.js' --watch ./tools/runes_scraper.js"
+    "scraper/items": "nodemon --exec 'babel-node ./tools/items_scraper.js' --watch ./tools/items_scraper.js",
+    "scraper/runes": "nodemon --exec 'babel-node ./tools/runes_scraper.js' --watch ./tools/runes_scraper.js"
   },
   "dependencies": {
     "@ll931217/vue-treeview": "../vue-treeview/master",
@@ -23,6 +22,9 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.5",
     "@intlify/vue-i18n-loader": "^1.0.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
