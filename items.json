@@ -1,0 +1,295 @@
+[
+  {
+    "text": "Helm",
+    "nodes": [
+      {
+        "text": "Skull Mask",
+        "value": "https://chronicon.fandom.com/wiki/Skull_Mask"
+      },
+      {
+        "text": "Life Guard",
+        "value": "https://chronicon.fandom.com/wiki/Life_Guard"
+      },
+      {
+        "text": "Extra-Ordinary Cap",
+        "value": "https://chronicon.fandom.com/wiki/Extra-Ordinary_Cap"
+      },
+      {
+        "text": "Luciella's Vision",
+        "value": "https://chronicon.fandom.com/wiki/Luciella%27s_Vision"
+      }
+    ]
+  },
+  {
+    "text": "Accessory",
+    "nodes": [
+      {
+        "text": "Balgar's Binding",
+        "value": ""
+      },
+      {
+        "text": "The Quadruplets",
+        "value": "https://chronicon.fandom.com/wiki/The_Quadruplets"
+      },
+      {
+        "text": "Heartstone",
+        "value": "https://chronicon.fandom.com/wiki/Heartstone"
+      },
+      {
+        "text": "Health Injector",
+        "value": "https://chronicon.fandom.com/wiki/Health_Injector"
+      },
+      {
+        "text": "Health Injector Mk2",
+        "value": "https://chronicon.fandom.com/wiki/Health_Injector_Mk2"
+      },
+      {
+        "text": "Mana Injector",
+        "value": "https://chronicon.fandom.com/wiki/Mana_Injector"
+      },
+      {
+        "text": "Heart of the Forest",
+        "value": "https://chronicon.fandom.com/wiki/Heart_of_the_Forest"
+      },
+      {
+        "text": "Entity's Eccentricity",
+        "value": "https://chronicon.fandom.com/wiki/Entity%27s_Eccentricity"
+      },
+      {
+        "text": "Rahlences Resolution",
+        "value": "https://chronicon.fandom.com/wiki/Rahlences_Resolution"
+      },
+      {
+        "text": "Tounge of the Deceiver",
+        "value": "https://chronicon.fandom.com/wiki/Tounge_of_the_Deceiver"
+      }
+    ]
+  },
+  {
+    "text": "Amulet",
+    "nodes": [
+      {
+        "text": "Death Choker",
+        "value": "https://chronicon.fandom.com/wiki/Death_Choker"
+      },
+      {
+        "text": "Amulet of Despair",
+        "value": "https://chronicon.fandom.com/wiki/Amulet_of_Despair"
+      },
+      {
+        "text": "Porthos S",
+        "value": "https://chronicon.fandom.com/wiki/Porthos"
+      },
+      {
+        "text": "Athos S",
+        "value": "https://chronicon.fandom.com/wiki/Athos"
+      },
+      {
+        "text": "Gravity",
+        "value": "https://chronicon.fandom.com/wiki/Gravity"
+      },
+      {
+        "text": "Ferocity",
+        "value": "https://chronicon.fandom.com/wiki/Ferocity"
+      },
+      {
+        "text": "Tear of The Arch Druid",
+        "value": "https://chronicon.fandom.com/wiki/Tear_of_The_Arch_Druid"
+      },
+      {
+        "text": "Talisman of Spines",
+        "value": "https://chronicon.fandom.com/wiki/Talisman_of_Spines"
+      }
+    ]
+  },
+  {
+    "text": "Offhand",
+    "nodes": [
+      {
+        "text": "Shield",
+        "nodes": [
+          {
+            "text": "The Hurtblocker Templar",
+            "value": "https://chronicon.fandom.com/wiki/The_Hurtblocker"
+          }
+        ]
+      },
+      {
+        "text": "Tome",
+        "nodes": [
+          {
+            "text": "",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "text": "Claw",
+        "nodes": [
+          {
+            "text": "Ancient Claw Of The FirstbornBerserker",
+            "value": "https://chronicon.fandom.com/wiki/Ancient_Claw_Of_The_Firstborn"
+          },
+          {
+            "text": "Dodgeclaw Berserker",
+            "value": "https://chronicon.fandom.com/wiki/Dodgeclaw"
+          }
+        ]
+      },
+      {
+        "text": "Arrow",
+        "nodes": [
+          {
+            "text": "Tumblespike Warden",
+            "value": "https://chronicon.fandom.com/wiki/Tumblespike"
+          }
+        ]
+      },
+      {
+        "text": "Spellbook",
+        "nodes": [
+          {
+            "text": "Book of Meteora Warlock",
+            "value": "https://chronicon.fandom.com/wiki/Book_of_Meteora"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Armor",
+    "nodes": [
+      {
+        "text": "Royal Armor",
+        "value": "https://chronicon.fandom.com/wiki/Royal_Armor"
+      },
+      {
+        "text": "Elementium Armor",
+        "value": "https://chronicon.fandom.com/wiki/Elementium_Armor"
+      },
+      {
+        "text": "Vestige of Lost Souls",
+        "value": "https://chronicon.fandom.com/wiki/Vestige_of_Lost_Souls"
+      },
+      {
+        "text": "Spectral Armor",
+        "value": "https://chronicon.fandom.com/wiki/Spectral_Armor"
+      },
+      {
+        "text": "Wind Dancer's Elegance",
+        "value": "https://chronicon.fandom.com/wiki/Wind_Dancer%27s_Elegance"
+      }
+    ]
+  },
+  {
+    "text": "Weapon",
+    "nodes": [
+      {
+        "text": "Sword",
+        "nodes": [
+          {
+            "text": "The Phantom",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "text": "Fists",
+        "nodes": [
+          {
+            "text": "The Last Word",
+            "value": "https://chronicon.fandom.com/wiki/The_Last_Word"
+          },
+          {
+            "text": "Haymaker",
+            "value": "https://chronicon.fandom.com/wiki/Haymaker"
+          },
+          {
+            "text": "Face Breakers",
+            "value": "https://chronicon.fandom.com/wiki/Face_Breakers"
+          }
+        ]
+      },
+      {
+        "text": "Bow",
+        "nodes": [
+          {
+            "text": "The Harp",
+            "value": "https://chronicon.fandom.com/wiki/The_Harp"
+          }
+        ]
+      },
+      {
+        "text": "Staff",
+        "nodes": [
+          {
+            "text": "Death Speaker",
+            "value": "https://chronicon.fandom.com/wiki/Death_Speaker"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Boots",
+    "nodes": [
+      {
+        "text": "Fleetstriders",
+        "value": "https://chronicon.fandom.com/wiki/Fleetstriders"
+      },
+      {
+        "text": "Pathmakers",
+        "value": "https://chronicon.fandom.com/wiki/Pathmakers"
+      },
+      {
+        "text": "Hydrascale Boots",
+        "value": "https://chronicon.fandom.com/wiki/Hydrascale_Boots"
+      },
+      {
+        "text": "Battle Boots",
+        "value": "https://chronicon.fandom.com/wiki/Battle_Boots"
+      }
+    ]
+  },
+  {
+    "text": "Ring",
+    "nodes": [
+      {
+        "text": "Unbreakable Bond S",
+        "value": "https://chronicon.fandom.com/wiki/The_Unbreakable_Bond"
+      },
+      {
+        "text": "Boomring",
+        "value": "https://chronicon.fandom.com/wiki/Boomring"
+      },
+      {
+        "text": "The Boomer",
+        "value": "https://chronicon.fandom.com/wiki/The_Boomer"
+      },
+      {
+        "text": "Ring of Pure Energies",
+        "value": "https://chronicon.fandom.com/wiki/Ring_of_Pure_Energies"
+      },
+      {
+        "text": "Ring of Titans",
+        "value": "https://chronicon.fandom.com/wiki/Ring_of_Titans"
+      },
+      {
+        "text": "Jeopardy",
+        "value": "https://chronicon.fandom.com/wiki/Jeopardy"
+      },
+      {
+        "text": "Aramis S",
+        "value": "https://chronicon.fandom.com/wiki/Aramis"
+      },
+      {
+        "text": "D'Artagnan S",
+        "value": "https://chronicon.fandom.com/wiki/All_for_One"
+      },
+      {
+        "text": "Primordial Rose",
+        "value": "https://chronicon.fandom.com/wiki/Primordial_Rose"
+      }
+    ]
+  }
+]
