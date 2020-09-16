@@ -1,6 +1,10 @@
-# chronibuild
+# ChroniBuild
 
-## Project setup
+> Project still under active development
+
+## Development
+
+### Project setup
 ```
 yarn install
 ```

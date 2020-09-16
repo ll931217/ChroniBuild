@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+#view-rune
   img(:src="getImgUrl(image)")
 </template>
 
@@ -14,12 +14,19 @@ export default {
   },
   methods: {
     getImgUrl(src) {
-      // console.log(src);
       const imgURL = src.replace(/%2F/g, '/').replace(/%27/g, '\'');
-      // return require(`../assets/images/${src}`);
       // eslint-disable-next-line global-require,import/no-dynamic-require
-      return require(`../assets/images${imgURL}`);
+      return require(`@/assets/images${imgURL}`);
     },
   },
 };
 </script>
+
+<style lang="sass">
+#view-rune
+  display: flex
+  align-items: center
+
+  img
+    transform: scale(1.3)
+</style>

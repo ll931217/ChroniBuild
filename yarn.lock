@@ -992,8 +992,10 @@
     js-yaml "^3.13.1"
     json5 "^2.1.1"
 
-"@ll931217/vue-treeview@../vue-treeview/master":
-  version "0.3.1"
+"@ll931217/vue-treeview@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@ll931217/vue-treeview/-/vue-treeview-0.3.2.tgz#ead9de757f5ad1e8b37e70da8b7fdf3338bbc215"
+  integrity sha512-djkeLb8ydzYp6W5Wgl8Y0/B6b/YV9id5dtsaLwJgFBwBeydm0vvUpKT4dURkFAbjqJKl3dxmFL61WZmRw7gh8Q==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.28"
     "@fortawesome/free-brands-svg-icons" "^5.13.0"

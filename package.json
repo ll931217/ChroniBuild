@@ -1,6 +1,6 @@
 {
   "name": "chronibuild",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,7 +11,7 @@
     "scraper/runes": "nodemon --exec 'babel-node ./tools/runes_scraper.js' --watch ./tools/runes_scraper.js"
   },
   "dependencies": {
-    "@ll931217/vue-treeview": "../vue-treeview/master",
+    "@ll931217/vue-treeview": "^0.3.2",
     "axios": "^0.20.0",
     "buefy": "^0.9.3",
     "core-js": "^3.6.5",
