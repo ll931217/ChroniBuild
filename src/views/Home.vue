@@ -11,13 +11,13 @@
             .details
               .char-stats
                 span.level Lv. 100
-                span.mastery-points , M 2000
-              span.skill-points Skill Points: 100
+                span.mastery-points , M {{ points.mastery }}
+              span.skill-points Skill Points: {{ points.skill }}
             p.class Berserker
             .tree-list
               .tree-tab.skills.disabled#guardian
               .tree-tab.skills.disabled#sky_lord
-              .tree-tab.skills#dragonkin
+              .tree-tab.skills.selected#dragonkin
               .tree-tab.skills.disabled#frostborn
               .tree-tab.skills.disabled#masteries
           Tree
@@ -30,6 +30,7 @@
 
 <script>
 import EditorJS from '@editorjs/editorjs';
+import { mapGetters } from 'vuex';
 
 import Gears from './Character/Gears.vue';
 import Tree from './Character/Tree.vue';
@@ -38,6 +39,11 @@ import Stats from './Character/Stats.vue';
 
 export default {
   name: 'Home',
+  computed: {
+    ...mapGetters({
+      points: 'points',
+    }),
+  },
   created() {
     const editor = new EditorJS({
       holder: 'editorjs',
@@ -142,8 +148,8 @@ export default {
       .tree-tab {
         border: 2px solid white;
         cursor: pointer;
-        height: 26px;
-        width: 26px;
+        height: 30px;
+        width: 30px;
         box-shadow: 2px 2px 5px black;
 
         &.selected {
