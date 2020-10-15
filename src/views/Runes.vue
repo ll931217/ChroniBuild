@@ -1,5 +1,5 @@
 <template lang="pug">
-#runes
+#runes.ml-4
   h1.title.is-1.has-text-white Runes
   .container
     .columns

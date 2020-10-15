@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import BaseStats from '@/assets/base_stats.json';
-import SkillData from '@/assets/skilldata.json';
-import RunesTree from '@/assets/runes_tree.json';
+import BaseStats from '@/assets/data/base_stats.json';
+import SkillData from '@/assets/data/skilldata.json';
+import RunesTree from '@/assets/data/runes_tree.json';
 
 Vue.use(Vuex);
 

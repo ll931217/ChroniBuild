@@ -6,7 +6,7 @@
     audio(ref="select-sound").select-sound
       source(src="./assets/sounds/menu_selected.wav")
     Navbar(:hoverSound="hoverSound", :selectSound="selectSound")
-    main.mt-3.pl-4
+    main.mt-3
       router-view
     footer.footer.mt-5
       p Game Version: {{ version }}
@@ -37,6 +37,7 @@ export default {
 
 *
   font-family: 'Arcade Classic'
+  word-spacing: .5rem
 
 body, html
   // background-image: url('https://cdn.cloudflare.steamstatic.com/steam/apps/375480/page_bg_generated_v6b.jpg?t=1598634326')
