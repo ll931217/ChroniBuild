@@ -4,12 +4,22 @@ import util from 'util';
 
 import axios from 'axios';
 import cheerio from 'cheerio';
+import consola from 'consola';
 
 const fs = fsModule.promises;
-const url = 'https://chronicon.fandom.com/wiki/True_Legendary_Items';
+const urls = [
+  {
+    text: 'True Legendary Items',
+    url: 'https://chronicon.fandom.com/wiki/True_Legendary_Items'
+  },
+  {
+    text: 'Legendary Items',
+    url: 'https://chronicon.fandom.com/wiki/Legendary_Items'
+  },
+];
 
-(async () => {
-  const { data: html } = await axios.get(url);
+const getItems = async (url) => {
+  const { data: html } = await axios.get(url.url);
   const $ = cheerio.load(html);
 
   const children = $('section#WikiaPage .WikiaPageContentWrapper article#WikiaMainContent #WikiaMainContentContainer #WikiaArticle #mw-content-text.mw-content-ltr.mw-content-text').children();
@@ -44,6 +54,11 @@ const url = 'https://chronicon.fandom.com/wiki/True_Legendary_Items';
     }
   });
 
-  await fs.writeFile(path.normalize('./items.json'), JSON.stringify(tree, null, 2));
-  console.log(util.inspect(tree, { color: true, depth: 6 }));
+  return { text: url.text, nodes: tree };
+};
+
+(() => {
+  Promise.all(urls.map(getItems)).then(tree => fs.writeFile(path.normalize('./items.json'), JSON.stringify(tree, null, 2)));
+  consola.success({ message: 'Items.json file updated', badge: true })
 })();
+
