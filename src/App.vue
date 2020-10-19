@@ -7,7 +7,7 @@
       source(src="./assets/sounds/menu_selected.wav")
     Navbar(:hoverSound="hoverSound", :selectSound="selectSound")
     main.mt-3
-      router-view
+      router-view(:hoverSound="hoverSound", :selectSound="selectSound")
     footer.footer.mt-5
       p Game Version: {{ version }}
         span
@@ -16,16 +16,30 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import sounds from '@/mixins/sounds';
 
 export default {
   name: 'App',
-  mixins: [sounds],
   computed: {
     ...mapGetters({
       version: 'version',
       export: 'export',
     }),
+  },
+  methods: {
+    hoverSound() {
+      const key = 'hover-sound';
+
+      this.$refs[key].load();
+      this.$refs[key].volume = 0.5;
+      this.$refs[key].play();
+    },
+    selectSound() {
+      const key = 'select-sound';
+
+      this.$refs[key].load();
+      this.$refs[key].volume = 0.2;
+      this.$refs[key].play();
+    },
   },
   components: {
     Navbar: () => import('@/components/Navbar.vue'),

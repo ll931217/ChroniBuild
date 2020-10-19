@@ -1,14 +1,12 @@
 <template lang="pug">
+- var itemTypes = ['helm', 'accessory', 'amulet', 'offhand', 'chest', 'weapon', 'boot', 'ring']
 .gears
   .items
-    .helm.skills
-    .accessory.skills
-    .amulet.skills
-    .offhand.skills
-    .chest.skills
-    .weapon.skills
-    .boot.skills
-    .ring.skills
+    each type in itemTypes
+      div(class=type)
+        .item.skills
+        .options
+        .gems
 </template>
 
 <script>
@@ -46,41 +44,66 @@ export default {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    transform: scale(2.5);
+    transform: scale(2);
 
-    div {
+    &> div {
+      display: grid;
+      grid-template-columns: repeat(2, 26px);
+      grid-template-rows: repeat(2, 52px);
+      grid-template-areas:
+        'item options'
+        'gems gems';
       border: 2px inset white;
       height: 26px;
       width: 26px;
+
+      &> .item {
+        grid-area: item;
+      }
+
+      &> .options {
+        grid-area: options;
+      }
+
+      &> .item, &> .options {
+        height: 26px;
+        width: 26px;
+      }
+
+      &> .gems {
+        grid-area: gems;
+        height: 26px;
+        width: 52px;
+      }
     }
 
-    .helm {
+    .helm .item {
       background-position: -3120px -1042px;
     }
-    .accessory {
+    .accessory .item {
       background-position: -2097px -1045px;
     }
-    .amulet {
+    .amulet .item {
       background-position: -3216px -1042px;
     }
 
-    .offhand {
+    .offhand .item {
       background-position: -2356px -1041px;
     }
 
-    .chest {
+    .chest .item {
       background-position: -3644px -1042px;
     }
 
-    .weapon {
+    .weapon .item {
       background-position: -2234px -1045px;
     }
 
-    .boot {
+    .boot .item {
       background-position: -3522px -1041px;
     }
 
-    .ring {
+    .ring .item {
       background-position: -3548px -1041px;
     }
   }

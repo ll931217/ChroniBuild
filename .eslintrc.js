@@ -15,11 +15,11 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-plusplus': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'import/no-extraneous-dependencies': [
-      'error',
-      {
+      'error', {
         'devDependencies': false,
         'optionalDependencies': false,
-        'peerDependencies': false
+        'peerDependencies': false,
+        'packageDir': './'
       }
     ],
   },

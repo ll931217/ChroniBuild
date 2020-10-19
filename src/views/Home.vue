@@ -15,11 +15,11 @@
               span.skill-points Skill Points: {{ points.skill }}
             p.class Berserker
             .tree-list
-              .tree-tab.skills.disabled#guardian
-              .tree-tab.skills.disabled#sky_lord
-              .tree-tab.skills.selected#dragonkin
-              .tree-tab.skills.disabled#frostborn
-              .tree-tab.skills.disabled#masteries
+              .tree-tab.skills.disabled#guardian(@mouseover="hoverSound()", @click="selectSound()")
+              .tree-tab.skills.disabled#sky_lord(@mouseover="hoverSound()", @click="selectSound()")
+              .tree-tab.skills.selected#dragonkin(@mouseover="hoverSound()", @click="selectSound()")
+              .tree-tab.skills.disabled#frostborn(@mouseover="hoverSound()", @click="selectSound()")
+              .tree-tab.skills.disabled#masteries(@mouseover="hoverSound()", @click="selectSound()")
           Tree
 
     .columns.is-centered.is-half
@@ -35,10 +35,21 @@ import { mapGetters } from 'vuex';
 import Gears from './Character/Gears.vue';
 import Tree from './Character/Tree.vue';
 import Stats from './Character/Stats.vue';
+
 // @ is an alias to /src
 
 export default {
   name: 'Home',
+  props: {
+    hoverSound: {
+      type: Function,
+      default: () => {},
+    },
+    selectSound: {
+      type: Function,
+      default: () => {},
+    },
+  },
   computed: {
     ...mapGetters({
       points: 'points',

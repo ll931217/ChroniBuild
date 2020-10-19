@@ -7,8 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "scraper/items": "nodemon --exec 'babel-node ./tools/items_scraper.js' --watch ./tools/items_scraper.js",
-    "scraper/runes": "nodemon --exec 'babel-node ./tools/runes_scraper.js' --watch ./tools/runes_scraper.js"
+    "scraper/items": "nodemon --exec 'babel-node ./tools/items_scraper.mjs' --watch ./tools/items_scraper.mjs",
+    "scraper/runes": "nodemon --exec 'babel-node ./tools/runes_scraper.mjs' --watch ./tools/runes_scraper.mjs"
   },
   "dependencies": {
     "@editorjs/editorjs": "^2.19.0",
