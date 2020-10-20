@@ -1,5 +1,5 @@
 <template lang="pug">
-#home
+#character-planner
   h1.title.is-1.has-text-white.mb-0.ml-3 Build
   .container
     .columns.is-gapless.is-mobile
@@ -32,14 +32,12 @@
 import EditorJS from '@editorjs/editorjs';
 import { mapGetters } from 'vuex';
 
-import Gears from './Character/Gears.vue';
-import Tree from './Character/Tree.vue';
-import Stats from './Character/Stats.vue';
-
-// @ is an alias to /src
+import Gears from './Gears.vue';
+import Tree from './Tree.vue';
+import Stats from './Stats.vue';
 
 export default {
-  name: 'Home',
+  name: 'CharacterPlanner',
   props: {
     hoverSound: {
       type: Function,
@@ -76,13 +74,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #editorjs {
   background-color: white;
-}
-
-.skills {
-  background-image: url(../assets/images/skills.png);
 }
 
 .character {
@@ -112,7 +106,7 @@ export default {
   .header {
     grid-area: header;
 
-    background-image: url(../assets/images/skills_bg.png);
+    background-image: url(../../assets/images/skills_bg.png);
     border-right: 5px dashed rgb(182, 131, 61);
     border-left: 5px dashed rgb(182, 131, 61);
     border-top: 5px dashed rgb(182, 131, 61);

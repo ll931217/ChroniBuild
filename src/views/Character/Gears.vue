@@ -6,8 +6,8 @@
       div(class=type)
         .item.skills
         .options
-          .enchant.skills
-          .reroll.skills
+          .enchant.skills(@mouseover="hoverSound()", @click="selectSound()")
+          .reroll.skills(@mouseover="hoverSound()", @click="selectSound()")
         .gems
           .slot
           .slot
@@ -17,6 +17,16 @@
 <script>
 export default {
   name: 'Gears',
+  props: {
+    hoverSound: {
+      type: Function,
+      default: () => {},
+    },
+    selectSound: {
+      type: Function,
+      default: () => {},
+    },
+  },
 };
 </script>
 
@@ -75,10 +85,14 @@ export default {
           flex-grow: 1;
         }
 
+       .enchant {
+          background-position: -3832px -1146px;
+          border-right: 1px solid white;
+        }
+
         .reroll {
-          background-position: -3415px -1597px;
-          height: 19px;
-          width: 19px;
+          // background-position: -3415px -1597px;
+          background-position: -2749px -1136px;
         }
       }
 
