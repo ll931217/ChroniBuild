@@ -6,7 +6,12 @@
       div(class=type)
         .item.skills
         .options
+          .enchant.skills
+          .reroll.skills
         .gems
+          .slot
+          .slot
+          .slot
 </template>
 
 <script>
@@ -44,18 +49,16 @@ export default {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    transform: scale(2);
+    transform: scale(1.4);
 
     &> div {
       display: grid;
-      grid-template-columns: repeat(2, 26px);
-      grid-template-rows: repeat(2, 52px);
+      grid-template-columns: 24px 48px;
+      grid-template-rows: repeat(2, 24px);
       grid-template-areas:
         'item options'
         'gems gems';
       border: 2px inset white;
-      height: 26px;
-      width: 26px;
 
       &> .item {
         grid-area: item;
@@ -63,17 +66,35 @@ export default {
 
       &> .options {
         grid-area: options;
+        display: inline-flex;
+
+        > div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-grow: 1;
+        }
+
+        .reroll {
+          background-position: -3415px -1597px;
+          height: 19px;
+          width: 19px;
+        }
       }
 
       &> .item, &> .options {
-        height: 26px;
-        width: 26px;
+        border: 1px solid white;
       }
 
       &> .gems {
         grid-area: gems;
-        height: 26px;
-        width: 52px;
+        border: 1px solid white;
+        display: inline-flex;
+
+        .slot {
+          border: 1px solid white;
+          flex-grow: 1;
+        }
       }
     }
 
