@@ -12,7 +12,25 @@
                 span.level Lv. 100
                 span.mastery-points , M {{ points.mastery }}
               span.skill-points Skill Points: {{ points.skill }}
-            p.class {{ settings.characterClass }}
+            .selection
+              b-field.class
+                b-select(placeholder="Pick a class", v-model="selectedClass", size="is-small")
+                  option(
+                    v-for="(cls, i) in classes",
+                    :value="cls.name",
+                    :key="i"
+                  ) {{ cls.name }}
+              b-field.difficulty
+                b-select(
+                  placeholder="Pick difficulty",
+                  v-model="selectedDifficulty",
+                  size="is-small"
+                )
+                  option(
+                    v-for="(diff, i) in difficulties",
+                    :value="diff.name",
+                    :key="i"
+                  ) {{ diff.name }}
             .tree-list
               .tree-tab.skills.disabled#guardian(@mouseover="hoverSound()", @click="selectSound()")
               .tree-tab.skills.disabled#sky_lord(@mouseover="hoverSound()", @click="selectSound()")
@@ -29,7 +47,7 @@
 
 <script>
 import EditorJS from '@editorjs/editorjs';
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 import Gears from './Gears.vue';
 import Tree from './Tree.vue';
@@ -47,8 +65,37 @@ export default {
       default: () => {},
     },
   },
+  data: () => ({
+    selectedClass: '',
+    selectedDifficulty: '',
+  }),
+  watch: {
+    selectedClass: {
+      handler: function handler(val) {
+        if (val === '') {
+          this.selectedClass = this.classes[0].name;
+        } else {
+          this.pickClass(val);
+        }
+      },
+      immediate: true,
+    },
+    selectedDifficulty: {
+      handler: function handler(val, oldVal) {
+        if (val === '') {
+          this.selectedDifficulty = this.difficulties[this.difficulties.length - 1].name;
+        } else {
+          this.restoreDifficulty(oldVal);
+          this.pickDifficulty(val);
+        }
+      },
+      immediate: true,
+    },
+  },
   computed: {
     ...mapGetters([
+      'classes',
+      'difficulties',
       'points',
       'settings',
     ]),
@@ -65,6 +112,13 @@ export default {
       .catch((err) => {
         console.log(`Editor.js initialisation failed because of ${err}`);
       });
+  },
+  methods: {
+    ...mapActions([
+      'pickClass',
+      'pickDifficulty',
+      'restoreDifficulty',
+    ]),
   },
   components: {
     Gears,
@@ -117,7 +171,7 @@ export default {
       "details . ."
       "details . ."
       ". . ."
-      "class tree-list .";
+      "selection tree-list .";
 
     .details {
       grid-area: details;
@@ -135,10 +189,19 @@ export default {
       }
     }
 
-    p.class {
-      grid-area: class;
-      margin: 0;
-      padding: 0 1em;
+    .selection {
+      grid-area: selection;
+      display: inline-flex;
+
+      .class {
+        margin: 0;
+        padding: 0 1em;
+      }
+
+      .difficulty {
+        margin: 0;
+        padding: 0 1em;
+      }
     }
 
     .tree-list {

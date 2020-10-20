@@ -202,6 +202,30 @@ export default new Vuex.Store({
       commit(MUTATE_INIT_BASE_STATS, { characterClass });
       commit(MUTATE_SETTINGS, { settingKey: 'characterClass', settingValue: characterClass });
     },
+    restoreDifficulty: ({ state, commit }, difficulty) => {
+      commit(MUTATE_SETTINGS, { settingKey: 'difficulty', settingValue: difficulty });
+      const diff = state.difficulties.find((d) => d.name === difficulty);
+      if (diff) {
+        Object.entries(diff.stats).forEach(([key, value]) => {
+          if (key === 'resistances') {
+            [
+              'resistance.fire',
+              'resistance.frost',
+              'resistance.holy',
+              'resistance.lightning',
+              'resistance.physical',
+              'resistance.poison',
+              'resistance.shadow',
+            ].forEach((res) => commit(MUTATE_BASE_STATS, {
+              statKey: res,
+              statValue: Math.abs(value),
+            }));
+          } else {
+            commit(MUTATE_BASE_STATS, { statKey: key, statValue: value });
+          }
+        });
+      }
+    },
     pickDifficulty: ({ state, commit }, difficulty) => {
       commit(MUTATE_SETTINGS, { settingKey: 'difficulty', settingValue: difficulty });
       const diff = state.difficulties.find((d) => d.name === difficulty);

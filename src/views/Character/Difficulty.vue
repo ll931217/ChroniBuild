@@ -9,6 +9,7 @@
     ).difficulty
       .banner(:class="difficulty.name.toLowerCase() + ' skills'")
       h1.title.is-1.has-text-pumpkin {{ difficulty.name.toUpperCase() }}
+      p.has-text-white.has-background-grey
 </template>
 
 <script>
