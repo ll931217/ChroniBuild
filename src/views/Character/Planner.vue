@@ -1,19 +1,18 @@
 <template lang="pug">
 #character-planner
-  h1.title.is-1.has-text-white.mb-0.ml-3 Build
   .container
-    .columns.is-gapless.is-mobile
+    .columns.is-gapless.is-mobile.mb-1
       .column
         .character
           Stats
-          Gears
+          Gears(:hoverSound="hoverSound", :selectSound="selectSound")
           .header
             .details
               .char-stats
                 span.level Lv. 100
                 span.mastery-points , M {{ points.mastery }}
               span.skill-points Skill Points: {{ points.skill }}
-            p.class Berserker
+            p.class {{ settings.characterClass }}
             .tree-list
               .tree-tab.skills.disabled#guardian(@mouseover="hoverSound()", @click="selectSound()")
               .tree-tab.skills.disabled#sky_lord(@mouseover="hoverSound()", @click="selectSound()")
@@ -49,9 +48,10 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({
-      points: 'points',
-    }),
+    ...mapGetters([
+      'points',
+      'settings',
+    ]),
   },
   created() {
     const editor = new EditorJS({

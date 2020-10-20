@@ -1,42 +1,41 @@
 <template lang="pug">
 #character-selection
-  h1.title.is-1.has-text-white.mb-0.ml-3 Pick a class
-  .columns
-    .column
-      section.mx-2.my-2
-        b-tabs(v-model="activeTab")
-          b-tab-item(v-for="(char, i) in classes", :label="char.name", :key="i")
+  section.mx-2.my-2
+    b-tabs(v-model="activeTab", position="is-centered", size="is-large")
+      b-tab-item(
+        v-for="(char, i) in classes",
+        :label="char.name", :key="i",
+      )
+        .columns
+          .column
+            .columns
+              .column.is-one-fifth
+                .icon(:class="char.name.toLowerCase() + ' skills'").mx-2.my-2
+              .column.characterClass
+                h1.title.is-1(:class="'has-text-' + char.name.toLowerCase()") {{ char.name }}
             .columns
               .column
-                .columns
-                  .column.is-one-fifth
-                    .icon(:class="char.name.toLowerCase() + ' skills'").mx-2.my-2
-                  .column.characterClass
-                    h1.title.is-1.has-text-white {{ char.name }}
-                .columns
-                  .column
-                    h3.title.is-3.has-text-warning Stats
-                    .bars
-                      div(
-                        v-for="([barKey, barValue], h) in Object.entries(char.bars)",
-                        :key="h",
-                        :class="barKey")
-                        h3.title.is-4.has-text-white.mb-2.mt-2 {{ barKey }}
-                        // .bar(:style="{ width: barValue + '%' }")
-                        b-progress(:value="barValue")
-                .columns
-                  .column
-                    h3.title.is-3.has-text-warning Perks
-                    .content
-                      ul.perks.is-size-4
-                        li(v-for="(perk, j) in char.perks", :key="j") {{ perk }}
-              .column.is-align-items-center
-                h3.title.is-3.has-text-warning Description
-                .description
-                  p(v-for="(desc, k) in char.description", :key="k").is-size-4 {{ desc }}
-  .columns
-    .column.is-justify-content-center.steps-buttons
-      b-button(type="light", @click="createBuild") Create Build
+                h3.title.is-3(:class="'has-text-' + char.name.toLowerCase()") Stats
+                .bars
+                  div(
+                    v-for="([barKey, barValue], h) in Object.entries(char.bars)",
+                    :key="h",
+                    :class="barKey")
+                    h3.title.is-4.has-text-white.mb-2.mt-2 {{ barKey }}
+                    b-progress(
+                      :value="barValue",
+                      size="is-large",
+                      :type="'is-' + char.name.toLowerCase()").bar
+            .columns
+              .column
+                h3.title.is-3(:class="'has-text-' + char.name.toLowerCase()") Perks
+                .content
+                  ul.perks.is-size-4
+                    li(v-for="(perk, j) in char.perks", :key="j") {{ perk }}
+          .column.is-align-items-center
+            h3.title.is-3(:class="'has-text-' + char.name.toLowerCase()") Description
+            .description
+              p(v-for="(desc, k) in char.description", :key="k").is-size-4 {{ desc }}
 </template>
 
 <script>
@@ -52,13 +51,18 @@ export default {
       'classes',
     ]),
   },
+  watch: {
+    activeTab: {
+      handler: 'selectClass',
+      immediate: true,
+    },
+  },
   methods: {
     ...mapActions([
       'pickClass',
     ]),
-    createBuild() {
+    selectClass() {
       const selection = Object.entries(this.classes)[this.activeTab][1];
-      console.log(selection);
       this.pickClass(selection.name);
     },
   },
@@ -89,14 +93,9 @@ export default {
 }
 
 .bars {
-  > .div {
-    border: 1px solid white;
-    height: 20px;
-    position: relative;
-
-    .bar {
-      background-color: white;
-      position: absolute;
+  .progress-wrapper.bar {
+    progress.progress {
+      border-radius: 0;
     }
   }
 }

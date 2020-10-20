@@ -12,7 +12,7 @@ export default {
   created() {
     const title = getTitle(this);
     if (title) {
-      document.title = `${title}| ChroniBuild`;
+      document.title = `${title} | ChroniBuild`;
     }
   },
 };

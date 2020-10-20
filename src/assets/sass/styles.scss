@@ -4,6 +4,16 @@
 // Set your colors
 $primary: #4099FF;
 $primary-invert: findColorInvert($primary);
+$purple: #8e44ad;
+$purple-invert: findColorInvert($purple);
+$grass: #2ecc71;
+$grass-invert: findColorInvert($grass);
+$peter-river: #3498db;
+$peter-river-invert: findColorInvert($peter-river);
+$turquoise: #1abc9c;
+$turquoise-invert: findColorInvert($turquoise);
+$pumpkin: #d35400;
+$pumpkin-invert: findColorInvert($pumpkin);
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: (
@@ -15,7 +25,37 @@ $colors: (
     "info": ($info, $info-invert),
     "success": ($success, $success-invert),
     "warning": ($warning, $warning-invert),
-    "danger": ($danger, $danger-invert)
+    "danger": ($danger, $danger-invert),
+
+    "purple": ($purple, $purple-invert),
+    "grass": ($grass, $grass-invert),
+    "peter-river": ($peter-river, $peter-river-invert),
+    "turquoise": ($turquoise, $turquoise-invert),
+    "pumpkin": ($pumpkin, $pumpkin-invert),
+
+    "templar": ($warning, $warning-invert),
+    "templar-conviction": ($danger, $danger-invert),
+    "templar-redemption": ($warning, $warning-invert),
+    "templar-vengeance": ($light, $light-invert),
+    "templar-wrath": ($turquoise, $turquoise-invert),
+
+    "berserker": ($danger, $danger-invert),
+    "berserker-dragonkin": ($danger, $danger-invert),
+    "berserker-frostborn": ($peter-river, $peter-river-invert),
+    "berserker-guardian": ($light, $light-invert),
+    "berserker-sky-lord": ($turquoise, $turquoise-invert),
+
+    "warden": ($success, $success-invert),
+    "warden-druid": ($grass, $grass-invert),
+    "warden-wind-ranger": ($light, $light-invert),
+    "warden-winter-herald": ($peter-river, $peter-river-invert),
+    "warden-storm-caller": ($turquoise, $turquoise-invert),
+
+    "warlock": ($purple, $purple-invert),
+    "warlock-corruptor": ($grass, $grass-invert),
+    "warlock-demonologist": ($danger, $danger-invert),
+    "warlock-lich": ($peter-river, $peter-river-invert),
+    "warlock-reaper": ($purple, $purple-invert)
 );
 
 // Links

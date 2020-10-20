@@ -59,12 +59,12 @@ export default {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    transform: scale(1.4);
+    transform: scale(1.3);
 
     &> div {
       display: grid;
-      grid-template-columns: 24px 48px;
-      grid-template-rows: repeat(2, 24px);
+      grid-template-columns: 26px 52px;
+      grid-template-rows: repeat(2, 26px);
       grid-template-areas:
         'item options'
         'gems gems';
@@ -79,6 +79,7 @@ export default {
         display: inline-flex;
 
         > div {
+          cursor: pointer;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -87,11 +88,10 @@ export default {
 
        .enchant {
           background-position: -3832px -1146px;
-          border-right: 1px solid white;
+          border-right: 2px solid white;
         }
 
         .reroll {
-          // background-position: -3415px -1597px;
           background-position: -2749px -1136px;
         }
       }
@@ -102,7 +102,6 @@ export default {
 
       &> .gems {
         grid-area: gems;
-        border: 1px solid white;
         display: inline-flex;
 
         .slot {

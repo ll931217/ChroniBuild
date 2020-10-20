@@ -20,6 +20,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Runes',
+  title: 'Runes',
   computed: {
     ...mapGetters({
       runes: 'runes',

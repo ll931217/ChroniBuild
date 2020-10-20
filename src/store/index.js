@@ -147,7 +147,6 @@ export default new Vuex.Store({
     ],
     settings: {
       characterClass: 'Berserker',
-      specialisation: '',
       difficulty: '',
     },
   },
@@ -162,7 +161,7 @@ export default new Vuex.Store({
     points: (state) => state.points,
     classes: (state) => state.classes,
     difficulties: (state) => state.difficulties,
-    settings: (state) => state.characterClass,
+    settings: (state) => state.settings,
     export: ({
       version,
       characterClass,
@@ -181,7 +180,6 @@ export default new Vuex.Store({
   },
   mutations: {
     [MUTATE_INIT_BASE_STATS]: (state, { characterClass }) => {
-      console.log(`BaseStats[${characterClass}]:`, state.base[characterClass]);
       state.stats = state.base[characterClass];
     },
     [MUTATE_BASE_STATS]: (state, { statKey, statValue }) => {
@@ -201,15 +199,29 @@ export default new Vuex.Store({
   },
   actions: {
     pickClass: ({ commit }, characterClass) => {
-      console.log('pickClass[characterClass]:', characterClass);
       commit(MUTATE_INIT_BASE_STATS, { characterClass });
       commit(MUTATE_SETTINGS, { settingKey: 'characterClass', settingValue: characterClass });
     },
-    pickSpecialisation: ({ commit }, specialisation) => {
-      commit(MUTATE_SETTINGS, { settingKey: 'specialisation', settingValue: specialisation });
-    },
-    pickDifficulty: ({ commit }, difficulty) => {
+    pickDifficulty: ({ state, commit }, difficulty) => {
       commit(MUTATE_SETTINGS, { settingKey: 'difficulty', settingValue: difficulty });
+      const diff = state.difficulties.find((d) => d.name === difficulty);
+      if (diff) {
+        Object.entries(diff.stats).forEach(([key, value]) => {
+          if (key === 'resistances') {
+            [
+              'resistance.fire',
+              'resistance.frost',
+              'resistance.holy',
+              'resistance.lightning',
+              'resistance.physical',
+              'resistance.poison',
+              'resistance.shadow',
+            ].forEach((res) => commit(MUTATE_BASE_STATS, { statKey: res, statValue: value }));
+          } else {
+            commit(MUTATE_BASE_STATS, { statKey: key, statValue: value });
+          }
+        });
+      }
     },
   },
   modules: {
