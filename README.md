@@ -17,6 +17,8 @@
 
 All contributions are welcome, just make a pull request of your changes, I will review the changes and merge it with the main code.
 
+I will provide a contribution guide further on in the development especially for localisation.
+
 ## Development
 
 ### Project setup
