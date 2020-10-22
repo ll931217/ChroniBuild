@@ -198,9 +198,12 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    pickClass: ({ commit }, characterClass) => {
+    pickClass: ({ state, commit, dispatch }, characterClass) => {
       commit(MUTATE_INIT_BASE_STATS, { characterClass });
       commit(MUTATE_SETTINGS, { settingKey: 'characterClass', settingValue: characterClass });
+      if (state.settings.difficulty !== '') {
+        dispatch('pickDifficulty', state.settings.difficulty);
+      }
     },
     restoreDifficulty: ({ state, commit }, difficulty) => {
       commit(MUTATE_SETTINGS, { settingKey: 'difficulty', settingValue: difficulty });

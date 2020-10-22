@@ -7,6 +7,11 @@
           Stats
           Gears(:hoverSound="hoverSound", :selectSound="selectSound")
           .header
+            .selected-class
+              .avatar(:class="settings.characterClass.toLowerCase() + ' skills'")
+              h1.title.is-1.name(
+                :class="'has-text-' + settings.characterClass.toLowerCase()"
+              ) {{ settings.characterClass }}
             .details
               .char-stats
                 span.level Lv. 100
@@ -39,14 +44,33 @@
               .tree-tab.skills.disabled#masteries(@mouseover="hoverSound()", @click="selectSound()")
           Tree
 
-    .columns.is-centered.is-half
+    .columns.is-centered
       .column
         h1.title.is-1.has-text-white.mb-0.ml-3 Guide
         #editorjs
+    .columns.is-centered
+      .column
+        b-button(type="is-success", @click="exportData()") Export
 </template>
 
 <script>
 import EditorJS from '@editorjs/editorjs';
+import Delimiter from '@editorjs/delimiter';
+import Embed from '@editorjs/embed';
+import Header from '@editorjs/header';
+import createGenericInlineTool, {
+  ItalicInlineTool,
+  UnderlineInlineTool,
+} from 'editorjs-inline-tool';
+import Inspector from 'editorjs-inspector';
+import Link from '@editorjs/link';
+import List from '@editorjs/list';
+import Paragraph from '@editorjs/paragraph';
+import Style from 'editorjs-style';
+import Table from '@editorjs/table';
+import TextSpoiler from 'editorjs-inline-spoiler-tool';
+import Undo from 'editorjs-undo';
+import Warning from '@editorjs/warning';
 import { mapActions, mapGetters } from 'vuex';
 
 import Gears from './Gears.vue';
@@ -68,6 +92,7 @@ export default {
   data: () => ({
     selectedClass: '',
     selectedDifficulty: '',
+    editor: null,
   }),
   watch: {
     selectedClass: {
@@ -101,11 +126,76 @@ export default {
     ]),
   },
   created() {
-    const editor = new EditorJS({
+    class ParagraphForEditorJSStyle extends Paragraph {
+      static get enableLineBreaks() {
+        return true;
+      }
+    }
+
+    this.editor = new EditorJS({
+      onReady: function onReady() {
+        // eslint-disable-next-line
+        new Undo({ editor: this.editor });
+      },
       holder: 'editorjs',
+      tools: {
+        delimiter: Delimiter,
+        header: Header,
+        editorJSInspector: Inspector,
+        paragraph: {
+          class: ParagraphForEditorJSStyle,
+          inlineToolbar: true,
+        },
+        bold: {
+          class: createGenericInlineTool({
+            sanitize: {
+              strong: {},
+            },
+            shortcut: 'CMD+B',
+            tagName: 'STRONG',
+            toolboxIcon:
+              '<svg class="icon icon--bold" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#bold"></use></svg>',
+          }),
+        },
+        italic: ItalicInlineTool,
+        underline: UnderlineInlineTool,
+        link: {
+          class: Link,
+          inlineToolbar: true,
+        },
+        list: {
+          class: List,
+          inlineToolbar: true,
+        },
+        style: Style,
+        table: Table,
+        TextSpoiler,
+        embed: {
+          class: Embed,
+          config: {
+            services: {
+              youtube: true,
+              imgur: true,
+              gfycat: true,
+              'twitch-video': true,
+              'twitch-channel': true,
+              twitter: true,
+              instagram: true,
+            },
+          },
+        },
+        warning: {
+          class: Warning,
+          inlineToolbar: true,
+          config: {
+            titlePlaceholder: 'NOTE:',
+            messagePlaceholder: 'This is a warning message',
+          },
+        },
+      },
     });
 
-    editor.isReady
+    this.editor.isReady
       .then(() => {
         console.log('Editor.js is ready to work!');
       })
@@ -119,6 +209,9 @@ export default {
       'pickDifficulty',
       'restoreDifficulty',
     ]),
+    async exportData() {
+      console.log(await this.editor.save());
+    },
   },
   components: {
     Gears,
@@ -128,9 +221,25 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-#editorjs {
+<style lang="scss">
+.ce-paragraph, .ce-inline-toolbar__actions {
   background-color: white;
+  color: black;
+}
+
+.icon {
+  background: none;
+}
+
+.ce-inline-toolbar__dropdown-content,
+.icon--toggler-down,
+.ce-conversion-tool {
+  color: black;
+}
+
+.ce-toolbar__settings-btn, .ce-toolbar__plus {
+  background: none;
+  color: white;
 }
 
 .character {
@@ -168,10 +277,39 @@ export default {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 4fr 1fr 1fr 4fr;
     grid-template-areas:
-      "details . ."
-      "details . ."
-      ". . ."
-      "selection tree-list .";
+      "selected selection details"
+      "selected selection details"
+      "selected . ."
+      "selected tree-list .";
+
+    .selected-class {
+      grid-area: selected;
+      display: inline-flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-grow: 1;
+
+      .avatar {
+        height: 54px;
+        width: 54px;
+
+        &.templar {
+          background-position: -102px -2610px;
+        }
+
+        &.berserker {
+          background-position: -118px -2059px;
+        }
+
+        &.warden {
+          background-position: -110px -3702px;
+        }
+
+        &.warlock {
+          background-position: -120px -367px;
+        }
+      }
+    }
 
     .details {
       grid-area: details;
