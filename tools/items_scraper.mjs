@@ -96,6 +96,6 @@ const getItems = async (url) => {
 };
 
 (() => {
-  Promise.all(urls.map(getItems)).then((tree) => fs.writeFile(path.normalize('./items.json'), JSON.stringify(tree, null, 2)));
+  Promise.all(urls.map(getItems)).then((tree) => fs.writeFile(path.normalize('./src/assets/data/items.json'), JSON.stringify(tree, null, 2)));
   consola.success({ message: 'Items.json file updated', badge: true });
 })();

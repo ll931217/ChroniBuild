@@ -39,23 +39,32 @@
             .tree-list
               .tree-tab.skills(
                 @mouseover="hoverSound()",
-                @click="selectSound()",
-                :class="{[tabs[selectedClass][0]]: true, disabled: selectedTab !== 0, selected: selectedTab === 0}"
+                @click="selectTab(0)",
+                :id="[tabs[selectedClass][0].toLowerCase()]",
+                :class="{ disabled: selectedTab !== 0, selected: selectedTab === 0 }"
               )
               .tree-tab.skills(
                 @mouseover="hoverSound()",
-                @click="selectSound()",
-                :class="{[tabs[selectedClass][1]]: true, disabled: selectedTab !== 1, selected: selectedTab === 1}"
+                @click="selectTab(1)",
+                :id="[tabs[selectedClass][1].toLowerCase()]",
+                :class="{ disabled: selectedTab !== 1, selected: selectedTab === 1 }"
               )
               .tree-tab.skills(
                 @mouseover="hoverSound()",
-                @click="selectSound()",
-                :class="{[tabs[selectedClass][2]]: true, disabled: selectedTab !== 2, selected: selectedTab === 2}"
+                @click="selectTab(2)",
+                :id="[tabs[selectedClass][2].toLowerCase()]",
+                :class="{ disabled: selectedTab !== 2, selected: selectedTab === 2 }"
+              )
+              .tree-tab.skills(
+                @mouseover="hoverSound()",
+                @click="selectTab(3)",
+                :id="[tabs[selectedClass][3].toLowerCase()]",
+                :class="{ disabled: selectedTab !== 3, selected: selectedTab === 3 }"
               )
               .tree-tab.skills#masteries(
                 @mouseover="hoverSound()",
-                @click="selectSound()",
-                :class="{ disabled: selectedTab !== 3, selected: selectedTab === 3 }"
+                @click="selectTab(4)",
+                :class="{ disabled: selectedTab !== 4, selected: selectedTab === 4 }"
               )
           Tree
 
@@ -154,11 +163,12 @@ export default {
         return true;
       }
     }
+    const app = this;
 
     this.editor = new EditorJS({
       onReady: function onReady() {
         // eslint-disable-next-line
-        new Undo({ editor: this.editor });
+        new Undo({ editor: app.editor });
       },
       holder: 'editorjs',
       tools: {
@@ -217,14 +227,6 @@ export default {
         },
       },
     });
-
-    this.editor.isReady
-      .then(() => {
-        console.log('Editor.js is ready to work!');
-      })
-      .catch((err) => {
-        console.log(`Editor.js initialisation failed because of ${err}`);
-      });
   },
   methods: {
     ...mapActions([
@@ -234,6 +236,10 @@ export default {
     ]),
     async exportData() {
       console.log(await this.editor.save());
+    },
+    selectTab(tab) {
+      this.selectSound();
+      this.selectedTab = tab;
     },
   },
   components: {
@@ -390,37 +396,71 @@ export default {
         }
 
         // BERSERKER
-        &#Guardian {
+        &#guardian {
           background-position: -2941px -1147px;
         }
 
-        &#Sky_Lord {
+        &#sky_lord {
           background-position: -2180px -1147px;
         }
 
-        &#Dragonkin {
+        &#dragonkin {
           background-position: -3188px -1146px;
         }
 
-        &#Frostborn {
+        &#frostborn {
           background-position: -3578px -1144px;
         }
 
         // TEMPLAR
-        &#Vengeance {
+        &#vengeance {
           background-position: -2331px -1147px;
         }
 
-        &#Wrath {
+        &#wrath {
           background-position: -2084px -1143px;
         }
 
-        &#Conviction {
+        &#conviction {
           background-position: -3082px -1144px;
         }
 
-        &#Redemption {
+        &#redemption {
           background-position: -2915px -1144px;
+        }
+
+        // WARDEN
+        &#wind_ranger {
+          background-position: -2775px -1147px;
+        }
+
+        &#druid {
+          background-position: -2648px -1145px;
+        }
+
+        &#storm_caller {
+          background-position: -2433px -1144px;
+        }
+
+        &#winter_herald {
+          background-position: -3162px -1145px;
+        }
+
+        // WARLOCK
+        &#corruptor {
+          background-position: -3482px -1143px;
+        }
+
+        &#lich {
+          background-position: -3916px -1253px;
+        }
+
+        &#demonologist {
+          background-position: -2718px -1147px;
+        }
+
+        &#reaper {
+          background-position: -2570px -1146px;
         }
       }
     }
