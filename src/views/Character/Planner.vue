@@ -38,63 +38,42 @@
                   ) {{ diff.name }}
             .tree-list
               .tree-tab.skills(
+                v-for="(tab, tabIndex) in tabs[selectedClass]",
                 @mouseover="hoverSound()",
-                @click="selectTab(0)",
-                :id="[tabs[selectedClass][0].toLowerCase()]",
-                :class="{ disabled: selectedTab !== 0, selected: selectedTab === 0 }"
+                @click="selectTab(tabIndex)",
+                :id="[combine(tab.toLowerCase())]",
+                :class="{ disabled: selectedTab !== tabIndex, selected: selectedTab === tabIndex }"
               )
-              .tree-tab.skills(
-                @mouseover="hoverSound()",
-                @click="selectTab(1)",
-                :id="[tabs[selectedClass][1].toLowerCase()]",
-                :class="{ disabled: selectedTab !== 1, selected: selectedTab === 1 }"
-              )
-              .tree-tab.skills(
-                @mouseover="hoverSound()",
-                @click="selectTab(2)",
-                :id="[tabs[selectedClass][2].toLowerCase()]",
-                :class="{ disabled: selectedTab !== 2, selected: selectedTab === 2 }"
-              )
-              .tree-tab.skills(
-                @mouseover="hoverSound()",
-                @click="selectTab(3)",
-                :id="[tabs[selectedClass][3].toLowerCase()]",
-                :class="{ disabled: selectedTab !== 3, selected: selectedTab === 3 }"
-              )
-              .tree-tab.skills#masteries(
-                @mouseover="hoverSound()",
-                @click="selectTab(4)",
-                :class="{ disabled: selectedTab !== 4, selected: selectedTab === 4 }"
-              )
-          Tree
+          Tree(:selectedClass="selectedClass", :selectedTab="selectedTab", :tabs="tabs")
 
-    .columns.is-centered
-      .column
-        h1.title.is-1.has-text-white.mb-0.ml-3 Guide
-        #editorjs
-    .columns.is-centered
-      .column
-        b-button(type="is-success", @click="exportData()") Export
+    //- .columns.is-centered
+    //-   .column
+    //-     h1.title.is-1.has-text-white.mb-0.ml-3 Guide
+    //-     #editorjs
+    //- .columns.is-centered
+    //-   .column
+    //-     b-button(type="is-success", @click="exportData()") Export
 </template>
 
 <script>
-import EditorJS from '@editorjs/editorjs';
-import Delimiter from '@editorjs/delimiter';
-import Embed from '@editorjs/embed';
-import Header from '@editorjs/header';
-import createGenericInlineTool, {
-  ItalicInlineTool,
-  UnderlineInlineTool,
-} from 'editorjs-inline-tool';
-import Inspector from 'editorjs-inspector';
-import Link from '@editorjs/link';
-import List from '@editorjs/list';
-import Paragraph from '@editorjs/paragraph';
-import Style from 'editorjs-style';
-import Table from '@editorjs/table';
-import TextSpoiler from 'editorjs-inline-spoiler-tool';
-import Undo from 'editorjs-undo';
-import Warning from '@editorjs/warning';
+// import EditorJS from '@editorjs/editorjs';
+// import Delimiter from '@editorjs/delimiter';
+// import Embed from '@editorjs/embed';
+// import Header from '@editorjs/header';
+// import createGenericInlineTool, {
+//   ItalicInlineTool,
+//   UnderlineInlineTool,
+// } from 'editorjs-inline-tool';
+// import Inspector from 'editorjs-inspector';
+// import Link from '@editorjs/link';
+// import List from '@editorjs/list';
+// import Paragraph from '@editorjs/paragraph';
+// import Style from 'editorjs-style';
+// import Table from '@editorjs/table';
+// import TextSpoiler from 'editorjs-inline-spoiler-tool';
+// import Undo from 'editorjs-undo';
+// import Warning from '@editorjs/warning';
+
 import { mapActions, mapGetters } from 'vuex';
 
 import Gears from './Gears.vue';
@@ -118,12 +97,12 @@ export default {
     selectedDifficulty: '',
     selectedTab: 0,
     tabs: {
-      Templar: ['Vengeance', 'Wrath', 'Conviction', 'Redemption'],
-      Berserker: ['Guardian', 'Sky_Lord', 'Dragonkin', 'Frostborn'],
-      Warden: ['Wind_Ranger', 'Druid', 'Storm_Caller', 'Winter_Herald'],
-      Warlock: ['Corruptor', 'Lich', 'Demonologist', 'Reaper'],
+      Templar: ['Vengeance', 'Wrath', 'Conviction', 'Redemption', 'Mastery'],
+      Berserker: ['Guardian', 'Sky Lord', 'Dragonkin', 'Frostborn', 'Mastery'],
+      Warden: ['Wind Ranger', 'Druid', 'Storm Caller', 'Winter Herald', 'Mastery'],
+      Warlock: ['Corruptor', 'Lich', 'Demonologist', 'Reaper', 'Mastery'],
     },
-    editor: null,
+    // editor: null,
   }),
   watch: {
     selectedClass: {
@@ -158,75 +137,75 @@ export default {
     ]),
   },
   created() {
-    class ParagraphForEditorJSStyle extends Paragraph {
-      static get enableLineBreaks() {
-        return true;
-      }
-    }
-    const app = this;
+    // class ParagraphForEditorJSStyle extends Paragraph {
+    //   static get enableLineBreaks() {
+    //     return true;
+    //   }
+    // }
+    // const app = this;
 
-    this.editor = new EditorJS({
-      onReady: function onReady() {
-        // eslint-disable-next-line
-        new Undo({ editor: app.editor });
-      },
-      holder: 'editorjs',
-      tools: {
-        delimiter: Delimiter,
-        header: Header,
-        editorJSInspector: Inspector,
-        paragraph: {
-          class: ParagraphForEditorJSStyle,
-          inlineToolbar: true,
-        },
-        bold: {
-          class: createGenericInlineTool({
-            sanitize: {
-              strong: {},
-            },
-            shortcut: 'CMD+B',
-            tagName: 'STRONG',
-            toolboxIcon:
-              '<svg class="icon icon--bold" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#bold"></use></svg>',
-          }),
-        },
-        italic: ItalicInlineTool,
-        underline: UnderlineInlineTool,
-        link: {
-          class: Link,
-          inlineToolbar: true,
-        },
-        list: {
-          class: List,
-          inlineToolbar: true,
-        },
-        style: Style,
-        table: Table,
-        TextSpoiler,
-        embed: {
-          class: Embed,
-          config: {
-            services: {
-              youtube: true,
-              imgur: true,
-              gfycat: true,
-              'twitch-video': true,
-              'twitch-channel': true,
-              twitter: true,
-              instagram: true,
-            },
-          },
-        },
-        warning: {
-          class: Warning,
-          inlineToolbar: true,
-          config: {
-            titlePlaceholder: 'NOTE:',
-            messagePlaceholder: 'This is a warning message',
-          },
-        },
-      },
-    });
+    // this.editor = new EditorJS({
+    //   onReady: function onReady() {
+    //     // eslint-disable-next-line
+    //     new Undo({ editor: app.editor });
+    //   },
+    //   holder: 'editorjs',
+    //   tools: {
+    //     delimiter: Delimiter,
+    //     header: Header,
+    //     editorJSInspector: Inspector,
+    //     paragraph: {
+    //       class: ParagraphForEditorJSStyle,
+    //       inlineToolbar: true,
+    //     },
+    //     bold: {
+    //       class: createGenericInlineTool({
+    //         sanitize: {
+    //           strong: {},
+    //         },
+    //         shortcut: 'CMD+B',
+    //         tagName: 'STRONG',
+    //         toolboxIcon:
+    //           '<svg class="icon icon--bold" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#bold"></use></svg>',
+    //       }),
+    //     },
+    //     italic: ItalicInlineTool,
+    //     underline: UnderlineInlineTool,
+    //     link: {
+    //       class: Link,
+    //       inlineToolbar: true,
+    //     },
+    //     list: {
+    //       class: List,
+    //       inlineToolbar: true,
+    //     },
+    //     style: Style,
+    //     table: Table,
+    //     TextSpoiler,
+    //     embed: {
+    //       class: Embed,
+    //       config: {
+    //         services: {
+    //           youtube: true,
+    //           imgur: true,
+    //           gfycat: true,
+    //           'twitch-video': true,
+    //           'twitch-channel': true,
+    //           twitter: true,
+    //           instagram: true,
+    //         },
+    //       },
+    //     },
+    //     warning: {
+    //       class: Warning,
+    //       inlineToolbar: true,
+    //       config: {
+    //         titlePlaceholder: 'NOTE:',
+    //         messagePlaceholder: 'This is a warning message',
+    //       },
+    //     },
+    //   },
+    // });
   },
   methods: {
     ...mapActions([
@@ -240,6 +219,9 @@ export default {
     selectTab(tab) {
       this.selectSound();
       this.selectedTab = tab;
+    },
+    combine(key) {
+      return key.split(' ').join('_');
     },
   },
   components: {
@@ -391,7 +373,7 @@ export default {
           z-index: 11;
         }
 
-        &#masteries {
+        &#mastery {
           background-position: -2596px -1146px;
         }
 
