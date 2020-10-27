@@ -9,7 +9,7 @@
           .header
             .selected-class
               .avatar(:class="settings.characterClass.toLowerCase() + ' skills'")
-              h1.title.is-1.name(
+              h1.title.is-2.name(
                 :class="'has-text-' + settings.characterClass.toLowerCase()"
               ) {{ settings.characterClass }}
             .details
@@ -37,11 +37,26 @@
                     :key="i"
                   ) {{ diff.name }}
             .tree-list
-              .tree-tab.skills.disabled#guardian(@mouseover="hoverSound()", @click="selectSound()")
-              .tree-tab.skills.disabled#sky_lord(@mouseover="hoverSound()", @click="selectSound()")
-              .tree-tab.skills.selected#dragonkin(@mouseover="hoverSound()", @click="selectSound()")
-              .tree-tab.skills.disabled#frostborn(@mouseover="hoverSound()", @click="selectSound()")
-              .tree-tab.skills.disabled#masteries(@mouseover="hoverSound()", @click="selectSound()")
+              .tree-tab.skills(
+                @mouseover="hoverSound()",
+                @click="selectSound()",
+                :class="{[tabs[selectedClass][0]]: true, disabled: selectedTab !== 0, selected: selectedTab === 0}"
+              )
+              .tree-tab.skills(
+                @mouseover="hoverSound()",
+                @click="selectSound()",
+                :class="{[tabs[selectedClass][1]]: true, disabled: selectedTab !== 1, selected: selectedTab === 1}"
+              )
+              .tree-tab.skills(
+                @mouseover="hoverSound()",
+                @click="selectSound()",
+                :class="{[tabs[selectedClass][2]]: true, disabled: selectedTab !== 2, selected: selectedTab === 2}"
+              )
+              .tree-tab.skills#masteries(
+                @mouseover="hoverSound()",
+                @click="selectSound()",
+                :class="{ disabled: selectedTab !== 3, selected: selectedTab === 3 }"
+              )
           Tree
 
     .columns.is-centered
@@ -92,6 +107,13 @@ export default {
   data: () => ({
     selectedClass: '',
     selectedDifficulty: '',
+    selectedTab: 0,
+    tabs: {
+      Templar: ['Vengeance', 'Wrath', 'Conviction', 'Redemption'],
+      Berserker: ['Guardian', 'Sky_Lord', 'Dragonkin', 'Frostborn'],
+      Warden: ['Wind_Ranger', 'Druid', 'Storm_Caller', 'Winter_Herald'],
+      Warlock: ['Corruptor', 'Lich', 'Demonologist', 'Reaper'],
+    },
     editor: null,
   }),
   watch: {
@@ -123,6 +145,7 @@ export default {
       'difficulties',
       'points',
       'settings',
+      'trees',
     ]),
   },
   created() {
@@ -255,13 +278,13 @@ export default {
     filter: brightness(.4);
   }
 
-  .circle {
+  > .circle {
     height: 22px;
     width: 22px;
     border-radius: 50%;
   }
 
-  .square {
+  > .square {
     height: 26px;
     width: 26px;
   }
@@ -367,21 +390,37 @@ export default {
         }
 
         // BERSERKER
-        &#guardian {
+        &#Guardian {
           background-position: -2941px -1147px;
         }
 
-        &#sky_lord {
+        &#Sky_Lord {
           background-position: -2180px -1147px;
         }
 
-        &#dragonkin {
-          // background-position: -2431px -1259px;
+        &#Dragonkin {
           background-position: -3188px -1146px;
         }
 
-        &#frostborn {
+        &#Frostborn {
           background-position: -3578px -1144px;
+        }
+
+        // TEMPLAR
+        &#Vengeance {
+          background-position: -2331px -1147px;
+        }
+
+        &#Wrath {
+          background-position: -2084px -1143px;
+        }
+
+        &#Conviction {
+          background-position: -3082px -1144px;
+        }
+
+        &#Redemption {
+          background-position: -2915px -1144px;
         }
       }
     }

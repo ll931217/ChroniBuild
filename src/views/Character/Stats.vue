@@ -1,6 +1,5 @@
 <template lang="pug">
 .stats.px-3.py-3
-  h3.title.has-text-white.is-4 Stats
   b-carousel(
     :autoplay="false",
     :indicator="indicator",
@@ -29,7 +28,7 @@ export default {
     iconPack: 'fas',
     iconPrev: 'chevron-left',
     iconNext: 'chevron-right',
-    indicator: false,
+    indicator: true,
   }),
   computed: {
     ...mapGetters([
@@ -38,7 +37,7 @@ export default {
     statsSorted() {
       const app = this;
       const carousel = [[]];
-      const breakPoint = 12;
+      const breakPoint = 11;
       let counter = 0;
 
       Object.entries(this.stats).forEach(([statKey, statValue]) => {
@@ -115,6 +114,9 @@ export default {
         switch (v) {
           case 'damageElements':
             newVal = 'damage';
+            break;
+          case 'resistance':
+            newVal = 'res';
             break;
           default:
             newVal = v;

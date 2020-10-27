@@ -1,17 +1,13 @@
 <template lang="pug">
-- var itemTypes = ['helm', 'accessory', 'amulet', 'offhand', 'chest', 'weapon', 'boot', 'ring']
 .gears
   .items
-    each type in itemTypes
-      div(class=type)
-        .item.skills
-        .options
-          .enchant.skills(@mouseover="hoverSound()", @click="selectSound()")
-          .reroll.skills(@mouseover="hoverSound()", @click="selectSound()")
-        .gems
-          .slot
-          .slot
-          .slot
+    div(v-for="type in itemTypes", :class="type")
+      .item.skills
+      .options
+        .enchant.skills(@mouseover="hoverSound()", @click="selectSound()")
+        .reroll.skills(@mouseover="hoverSound()", @click="scrambleSlots(type)")
+      .gems
+        .slot(v-for="slot in gems[type]", :class="slot")
 </template>
 
 <script>
@@ -25,6 +21,68 @@ export default {
     selectSound: {
       type: Function,
       default: () => {},
+    },
+  },
+  data: () => ({
+    itemTypes: ['helm', 'accessory', 'amulet', 'offhand', 'chest', 'weapon', 'boot', 'ring'],
+    gemTemplates: {
+      one: {
+        items: ['accessory', 'offhand', 'boot', 'ring'],
+        template: [
+          ['pentagon', '', ''],
+          ['square', '', ''],
+          ['circle', '', ''],
+        ],
+      },
+      two: {
+        items: ['helm', 'amulet', 'weapon'],
+        template: [
+          ['pentagon', '', ''],
+          ['square', 'square', ''],
+          ['square', 'circle', ''],
+          ['circle', 'circle', ''],
+        ],
+      },
+      three: {
+        items: ['chest'],
+        template: [
+          ['pentagon', 'pentagon', ''],
+          ['pentagon', 'square', 'square'],
+          ['pentagon', 'square', 'circle'],
+          ['pentagon', 'circle', 'circle'],
+          ['square', 'square', 'square'],
+          ['square', 'square', 'circle'],
+          ['square', 'circle', 'circle'],
+          ['circle', 'circle', 'circle'],
+        ],
+      },
+    },
+    gems: {
+      helm: [],
+      accessory: [],
+      amulet: [],
+      offhand: [],
+      chest: [],
+      weapon: [],
+      boot: [],
+      ring: [],
+    },
+  }),
+  created() {
+    this.itemTypes.forEach(this.scrambleSlots);
+  },
+  methods: {
+    scrambleSlots(type) {
+      this.selectSound();
+
+      const app = this;
+
+      Object.keys(this.gemTemplates).forEach((key) => {
+        if (app.gemTemplates[key].items.find((i) => i === type)) {
+          const template = [...app.gemTemplates[key].template];
+          app.gems[type] = template[Math.round(Math.random() * (template.length - 1))];
+        }
+      });
     },
   },
 };
@@ -105,8 +163,23 @@ export default {
         display: inline-flex;
 
         .slot {
-          border: 1px solid white;
-          flex-grow: 1;
+          // border: 1px solid white;
+          flex: 1 1 0px;
+        }
+
+        .square {
+          background-image: url(../../assets/images/square.png);
+          background-size: cover;
+        }
+
+        .pentagon {
+          background-image: url(../../assets/images/pentagon.png);
+          background-size: cover;
+        }
+
+        .circle {
+          background-image: url(../../assets/images/circle.png);
+          background-size: cover;
         }
       }
     }

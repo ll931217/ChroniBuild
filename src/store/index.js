@@ -152,7 +152,7 @@ export default new Vuex.Store({
   },
   getters: {
     version: (state) => state.version,
-    tree: (state) => state.tree,
+    trees: (state) => state.trees,
     base: (state) => state.base,
     stats: (state) => state.stats,
     masteries: (state) => state.masteries,

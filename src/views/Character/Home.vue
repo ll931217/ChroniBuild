@@ -1,5 +1,5 @@
 <template lang="pug">
-#character-home.pt-5
+#character-home
   planner(:hoverSound="hoverSound", :selectSound="selectSound")
 </template>
 
