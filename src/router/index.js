@@ -28,6 +28,11 @@ const routes = [
     ],
   },
   {
+    path: '/scrolls',
+    name: 'Scrolls',
+    component: () => import(/* webpackChunkName: "items" */ '../views/Scrolls.vue'),
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
