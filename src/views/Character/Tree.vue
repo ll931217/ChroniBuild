@@ -8,19 +8,18 @@
             'Active Skill',\
             'Companion Skill',\
             'Heritage Skill',\
-          ].indexOf(value.type) !== -1", :ref="'skills-' + value.skill_requirement"
+          ].indexOf(value.type) !== -1", :id="'skills-' + value.skill_requirement"
         )
         .skills(
           v-else,
           :class="key",
-          :ref="'skill-' + value.id",
-          @click="showRef(value.id)"
-        ) {{ parseInt(value.id, 10) }}
+          :id="'skill-' + value.id",
+        ) {{ value.id }}
 </template>
 
 <script>
-import LeaderLine from 'leader-line-vue';
 import { mapGetters } from 'vuex';
+import LeaderLine from 'leader-line-vue';
 
 export default {
   name: 'Tree',
@@ -110,16 +109,18 @@ export default {
             const requirements = JSON.parse(value.skill_requirement);
             console.log(key, value.id);
             console.log('Requirements:', requirements);
-            console.log('End:', app.$refs[`skill-${value.id}`]);
 
             requirements.forEach((req) => {
-              const start = app.$refs[`skill-${req}`];
-              console.log('Start:', start, typeof start);
+              // const start = app.$refs[`skill-${req}`];
+              const start = document.getElementById(`skill-${req}`);
+              const end = document.getElementById(`skill-${value.id}`);
 
-              if (start) {
+              if (start && end) {
+                console.log('Start:', start, typeof start);
+                console.log('End:', end, typeof end);
                 app.lines.push(LeaderLine.setLine(
-                  app.$refs[`skill-${req}`],
-                  app.$refs[`skill-${value.id}`],
+                  start,
+                  end,
                   { color: '#3498db', path: 'straight', endPlug: 'behind' },
                 ));
               }

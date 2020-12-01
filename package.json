@@ -30,7 +30,6 @@
     "editorjs-inspector": "^1.2.3",
     "editorjs-style": "^2.2.0",
     "editorjs-undo": "^0.1.4",
-    "leader-line": "^1.0.5",
     "leader-line-vue": "^2.1.1",
     "pastebin-js": "^1.0.5",
     "pug-plain-loader": "^1.0.0",
