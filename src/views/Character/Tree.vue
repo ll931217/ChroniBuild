@@ -3,12 +3,19 @@
   .row(v-for="(row, rowKey) in treeStructure", :key="rowKey")
     .col(v-for="([key, value], colKey) in row", :key="colKey")
       template(v-if="typeof value === 'object' && key !== 'None'")
-        .skills.empty-skill(v-if="[\
-          'Active Skill',\
-          'Companion Skill',\
-          'Heritage Skill',\
-          ].indexOf(value.type) !== -1", :ref="'skills-' + value.skill_requirement")
-        .skills(v-else, :class="key", :ref="'skill-' + parseInt(value.id, 10)") {{ value.id }}
+        .skills.empty-skill(
+          v-if="[\
+            'Active Skill',\
+            'Companion Skill',\
+            'Heritage Skill',\
+          ].indexOf(value.type) !== -1", :ref="'skills-' + value.skill_requirement"
+        )
+        .skills(
+          v-else,
+          :class="key",
+          :ref="'skill-' + value.id",
+          @click="showRef(value.id)"
+        ) {{ parseInt(value.id, 10) }}
 </template>
 
 <script>
@@ -59,19 +66,28 @@ export default {
   },
   mounted() {
     console.clear();
+    const app = this;
+
     this.createTreeStructure();
-    this.attachRequiredSkills();
+    setTimeout(() => {
+      app.attachRequiredSkills();
+      console.log(app.$refs['skill-241']);
+    }, 1000);
   },
   methods: {
+    showRef(id) {
+      console.log(this.$refs[`skill-${id}`]);
+    },
     createTreeStructure() {
       this.treeStructure = [];
       const currentTabName = this.tabs[this.selectedClass][this.selectedTab];
       const treeItems = this.trees[this.selectedClass][currentTabName];
 
-      for (let y = 0; y < 7; y++) {
+      for (let y = 0; y < 7; y++) { // Tree Columns
         const row = [];
-        for (let x = 0; x < 10; x++) {
+        for (let x = 0; x < 10; x++) { // Tree Rows
           const skillFound = Object.entries(treeItems)
+            .filter((tree) => tree[0] !== 'None')
             .find((ti) => (
               parseInt(ti[1].x, 10) === x && parseInt(ti[1].y, 10) === y
             ));
@@ -88,27 +104,27 @@ export default {
       const app = this;
 
       this.treeStructure.forEach((row) => {
+        console.log('row:', row);
         row.forEach(([key, value]) => {
           if (typeof value === 'object' && value.skill_requirement !== 'none') {
-            console.log(key, value.id);
-            console.log(key, JSON.parse(value.skill_requirement));
-            console.log(app.$refs[`skill-${value.id}`]);
-
             const requirements = JSON.parse(value.skill_requirement);
+            console.log(key, value.id);
             console.log('Requirements:', requirements);
+            console.log('End:', app.$refs[`skill-${value.id}`]);
 
             requirements.forEach((req) => {
               const start = app.$refs[`skill-${req}`];
-              console.log('Start:', start);
+              console.log('Start:', start, typeof start);
 
               if (start) {
                 app.lines.push(LeaderLine.setLine(
-                  start,
+                  app.$refs[`skill-${req}`],
                   app.$refs[`skill-${value.id}`],
                   { color: '#3498db', path: 'straight', endPlug: 'behind' },
                 ));
               }
             });
+            console.log('========================================');
           }
         });
       });
