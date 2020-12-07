@@ -87,7 +87,10 @@ const sortIntoTree = (data) => {
           secondTemp.nodes.push({
             text: item.name,
             link: {
-              type: 'router-link', key: 'name', value: 'Rune', query: { image: imgURL },
+              type: 'router-link',
+              key: 'name',
+              value: 'Rune',
+              query: { image: imgURL },
             },
           });
         });

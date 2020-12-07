@@ -1,0 +1,253 @@
+[
+  {
+    "text": "Berserker",
+    "nodes": [
+      {
+        "text": "Embershield",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FBerserker%2FEmbershield.png"
+          }
+        }
+      },
+      {
+        "text": "Lightning_Wyrms",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FBerserker%2FLightning_Wyrms.png"
+          }
+        }
+      },
+      {
+        "text": "Magma_Hydra",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FBerserker%2FMagma_Hydra.png"
+          }
+        }
+      },
+      {
+        "text": "Ralling_Cry",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FBerserker%2FRalling_Cry.png"
+          }
+        }
+      },
+      {
+        "text": "War_Cry",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FBerserker%2FWar_Cry.png"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "text": "Templar",
+    "nodes": [
+      {
+        "text": "Dancing_Blades",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FTemplar%2FDancing_Blades.png"
+          }
+        }
+      },
+      {
+        "text": "Healing_Touch",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FTemplar%2FHealing_Touch.png"
+          }
+        }
+      },
+      {
+        "text": "Reprisal",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FTemplar%2FReprisal.png"
+          }
+        }
+      },
+      {
+        "text": "Repluse",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FTemplar%2FRepluse.png"
+          }
+        }
+      },
+      {
+        "text": "Shield_Dance",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FTemplar%2FShield_Dance.png"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "text": "Warden",
+    "nodes": [
+      {
+        "text": "Agility",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FWarden%2FAgility.png"
+          }
+        }
+      },
+      {
+        "text": "Hail_Storm",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FWarden%2FHail_Storm.png"
+          }
+        }
+      },
+      {
+        "text": "Lay_Traps",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FWarden%2FLay_Traps.png"
+          }
+        }
+      },
+      {
+        "text": "Root_Veil",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FWarden%2FRoot_Veil.png"
+          }
+        }
+      },
+      {
+        "text": "Sprint",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FWarden%2FSprint.png"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "text": "Warlock",
+    "nodes": [
+      {
+        "text": "Bone_Storm",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FWarlock%2FBone_Storm.png"
+          }
+        }
+      },
+      {
+        "text": "Curse_of_Reckoning",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FWarlock%2FCurse_of_Reckoning.png"
+          }
+        }
+      },
+      {
+        "text": "Curse_of_Terror",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FWarlock%2FCurse_of_Terror.png"
+          }
+        }
+      },
+      {
+        "text": "Frozen_Fate",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FWarlock%2FFrozen_Fate.png"
+          }
+        }
+      },
+      {
+        "text": "Soul_Warp",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FWarlock%2FSoul_Warp.png"
+          }
+        }
+      },
+      {
+        "text": "Wall_of_Fire",
+        "link": {
+          "type": "route-link",
+          "key": "name",
+          "value": "Scroll",
+          "query": {
+            "image": "%2Fscrolls%2FWarlock%2FWall_of_Fire.png"
+          }
+        }
+      }
+    ]
+  }
+]

@@ -29,16 +29,24 @@ export default {
     hoverSound() {
       const key = 'hover-sound';
 
-      this.$refs[key].load();
-      this.$refs[key].volume = 0.5;
-      this.$refs[key].play();
+      try {
+        this.$refs[key].load();
+        this.$refs[key].volume = 0.5;
+        this.$refs[key].play();
+      } catch (e) {
+        console.log(e);
+      }
     },
     selectSound() {
       const key = 'select-sound';
 
-      this.$refs[key].load();
-      this.$refs[key].volume = 0.2;
-      this.$refs[key].play();
+      try {
+        this.$refs[key].load();
+        this.$refs[key].volume = 0.2;
+        this.$refs[key].play();
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
   components: {
@@ -48,7 +56,6 @@ export default {
 </script>
 
 <style lang="sass">
-
 *
   font-family: 'Arcade Classic'
   word-spacing: .5rem
@@ -61,6 +68,7 @@ body, html
   background-repeat: no-repeat
   background-size: cover
   color: white
+  overflow: auto
 
 .navbar, main, .footer
   background-image: url('./assets/images/Tiled_brick.jpg')

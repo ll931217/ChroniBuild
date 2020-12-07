@@ -25,6 +25,12 @@
       ).has-text-white Runes
       b-navbar-item(
         tag="router-link",
+        :to="{ name: 'Scrolls' }",
+        @mouseover.native="hoverSound()",
+        @click.native="selectSound()"
+      ).has-text-white Scrolls
+      b-navbar-item(
+        tag="router-link",
         :to="{ name: 'About' }",
         @mouseover.native="hoverSound()",
         @click.native="selectSound()"

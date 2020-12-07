@@ -104,7 +104,6 @@ export default {
 
 .gears {
   grid-area: gears;
-  background-image: url(../../assets/images/skills_bg.png);
   // border-top: 5px dashed rgb(182, 131, 61);
   border-bottom: 5px dashed rgb(182, 131, 61);
   border-left: 5px dashed rgb(182, 131, 61);
