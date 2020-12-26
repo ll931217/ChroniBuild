@@ -132,5 +132,9 @@ export default {
 .stats {
   background-color: black;
   grid-area: stats;
+
+  .carousel {
+    height: 100%;
+  }
 }
 </style>

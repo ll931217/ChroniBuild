@@ -30,7 +30,7 @@ const routes = [
   {
     path: '/scrolls',
     name: 'Scrolls',
-    component: () => import(/* webpackChunkName: "items" */ '../views/Scrolls.vue'),
+    component: () => import(/* webpackChunkName: "scrolls" */ '../views/Scrolls.vue'),
   },
   {
     path: '/about',

@@ -56,24 +56,6 @@
 </template>
 
 <script>
-// import EditorJS from '@editorjs/editorjs';
-// import Delimiter from '@editorjs/delimiter';
-// import Embed from '@editorjs/embed';
-// import Header from '@editorjs/header';
-// import createGenericInlineTool, {
-//   ItalicInlineTool,
-//   UnderlineInlineTool,
-// } from 'editorjs-inline-tool';
-// import Inspector from 'editorjs-inspector';
-// import Link from '@editorjs/link';
-// import List from '@editorjs/list';
-// import Paragraph from '@editorjs/paragraph';
-// import Style from 'editorjs-style';
-// import Table from '@editorjs/table';
-// import TextSpoiler from 'editorjs-inline-spoiler-tool';
-// import Undo from 'editorjs-undo';
-// import Warning from '@editorjs/warning';
-
 import { mapActions, mapGetters } from 'vuex';
 
 import Gears from './Gears.vue';
@@ -136,77 +118,6 @@ export default {
       'trees',
     ]),
   },
-  created() {
-    // class ParagraphForEditorJSStyle extends Paragraph {
-    //   static get enableLineBreaks() {
-    //     return true;
-    //   }
-    // }
-    // const app = this;
-
-    // this.editor = new EditorJS({
-    //   onReady: function onReady() {
-    //     // eslint-disable-next-line
-    //     new Undo({ editor: app.editor });
-    //   },
-    //   holder: 'editorjs',
-    //   tools: {
-    //     delimiter: Delimiter,
-    //     header: Header,
-    //     editorJSInspector: Inspector,
-    //     paragraph: {
-    //       class: ParagraphForEditorJSStyle,
-    //       inlineToolbar: true,
-    //     },
-    //     bold: {
-    //       class: createGenericInlineTool({
-    //         sanitize: {
-    //           strong: {},
-    //         },
-    //         shortcut: 'CMD+B',
-    //         tagName: 'STRONG',
-    //         toolboxIcon:
-    //           '<svg class="icon icon--bold" width="12px" height="14px"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#bold"></use></svg>',
-    //       }),
-    //     },
-    //     italic: ItalicInlineTool,
-    //     underline: UnderlineInlineTool,
-    //     link: {
-    //       class: Link,
-    //       inlineToolbar: true,
-    //     },
-    //     list: {
-    //       class: List,
-    //       inlineToolbar: true,
-    //     },
-    //     style: Style,
-    //     table: Table,
-    //     TextSpoiler,
-    //     embed: {
-    //       class: Embed,
-    //       config: {
-    //         services: {
-    //           youtube: true,
-    //           imgur: true,
-    //           gfycat: true,
-    //           'twitch-video': true,
-    //           'twitch-channel': true,
-    //           twitter: true,
-    //           instagram: true,
-    //         },
-    //       },
-    //     },
-    //     warning: {
-    //       class: Warning,
-    //       inlineToolbar: true,
-    //       config: {
-    //         titlePlaceholder: 'NOTE:',
-    //         messagePlaceholder: 'This is a warning message',
-    //       },
-    //     },
-    //   },
-    // });
-  },
   methods: {
     ...mapActions([
       'pickClass',
@@ -239,33 +150,18 @@ export default {
   border-radius: 0;
   color: white;
   font-weight: bold;
+
+  option {
+    color: white;
+  }
 }
 
 .select:not(.is-multiple):not(.is-loading)::after {
   border-color: yellow;
 }
 
-.ce-paragraph, .ce-inline-toolbar__actions {
-  background-color: white;
-  color: black;
-}
-
-.icon {
-  background: none;
-}
-
-.ce-inline-toolbar__dropdown-content,
-.icon--toggler-down,
-.ce-conversion-tool {
-  color: black;
-}
-
-.ce-toolbar__settings-btn, .ce-toolbar__plus {
-  background: none;
-  color: white;
-}
-
 .character {
+  background-image: url(../../assets/images/skills_bg.png);
   display: grid;
   height: 400px;
   grid-template-columns: 3fr repeat(3, 2fr);
