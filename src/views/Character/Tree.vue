@@ -7,7 +7,7 @@
           'Active Skill',\
           'Companion Skill',\
           'Heritage Skill',\
-          ].indexOf(value.type) !== -1", :ref="'skills-' + value.skill_requirement")
+        ].indexOf(value.type) !== -1", :ref="'skills-' + value.skill_requirement")
         .skills(v-else, :class="key", :ref="'skill-' + parseInt(value.id, 10)") {{ value.id }}
 </template>
 
