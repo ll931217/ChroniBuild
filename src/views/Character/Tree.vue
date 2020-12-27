@@ -1,21 +1,24 @@
 <template lang="pug">
-.tree(:class="tabs[selectedClass][selectedTab]")
+.tree(:class="tabs[selectedClass][selectedTab]", @mouseover="treeHover")
+  .context-menu(ref="context-menu")
+    h1 Context Menu
   .row(v-for="(row, rowKey) in treeStructure", :key="rowKey")
-    .col(v-for="([key, value], colKey) in row", :key="colKey")
-      template(v-if="typeof value === 'object' && key !== 'None'")
-        .skills.empty-skill(
-          v-if="[\
-            'Active Skill',\
-            'Companion Skill',\
-            'Heritage Skill',\
-          ].indexOf(value.type) !== -1",
-          :ref="'skills-' + value.skill_requirement")
-        .skills(v-else, :class="key", :ref="'skill-' + parseInt(value.id, 10)") {{ value.id }}
+    .col(v-for="(col, colKey) in row", :key="colKey")
+      template(v-if="col.length > 0")
+        Skill(
+          :single="col.length === 1",
+          :skills="col",
+          :row="rowKey",
+          :col="colKey",
+          :tree="treeStructure",
+        )
 </template>
 
 <script>
-import LeaderLine from 'leader-line-vue';
 import { mapGetters } from 'vuex';
+import LeaderLine from 'leader-line-vue';
+
+import Skill from './Skill.vue';
 
 export default {
   name: 'Tree',
@@ -46,80 +49,150 @@ export default {
   watch: {
     selectedClass(val) {
       console.log('Class changed:', val);
+      const app = this;
+
       this.lines.forEach((line) => line.remove());
+      this.lines.length = 0;
 
       this.createTreeStructure();
+      if (this.selectedTab !== 4) {
+        setTimeout(() => {
+          app.attachRequiredSkills();
+        }, 500);
+      }
     },
     selectedTab(val) {
       console.log('Tab changed:', val);
+      const app = this;
+
       this.lines.forEach((line) => line.remove());
+      this.lines.length = 0;
 
       this.createTreeStructure();
+      if (this.selectedTab !== 4) {
+        setTimeout(() => {
+          app.attachRequiredSkills();
+        }, 500);
+      }
     },
   },
   mounted() {
-    // console.clear();
+    console.clear();
+    const app = this;
+
     this.createTreeStructure();
+    if (this.selectedTab !== 4) {
+      setTimeout(() => {
+        app.attachRequiredSkills();
+      }, 500);
+    }
   },
   methods: {
+    treeHover(event) {
+      const tree = document.querySelector('.tree');
+      console.clear();
+      console.log('treeHover[event.clientX]:', event.clientX);
+      console.log('treeHover[event.clientY]:', event.clientY);
+
+      console.log('tree[width]:', tree.offsetWidth);
+      console.log('tree[height]:', tree.offsetHeight);
+
+      const x = `${event.clientX - tree.offsetWidth}px`;
+      const y = `${event.clientY - tree.offsetHeight}px`;
+
+      this.$refs['context-menu'].style.left = x;
+      this.$refs['context-menu'].style.top = y;
+      console.log('x:', x);
+      console.log('y:', y);
+      console.log('context-menu[style.top]:', this.$refs['context-menu'].style.top);
+      console.log('context-menu[style.left]:', this.$refs['context-menu'].style.left);
+    },
+    selectSkill(skillIDs) {
+      const eleID = `skill-${skillIDs.sort((a, b) => a - b).join('_')}`;
+      const ele = document.getElementById(eleID);
+      if (ele) {
+        const position = ele.getBoundingClientRect();
+        const x = position.left;
+        const y = position.top;
+
+        console.log('Skills:', skillIDs, position, x, y);
+        console.log(
+          ele.dataset.row,
+          ele.dataset.col,
+          this.treeStructure[ele.dataset.row][ele.dataset.col],
+        );
+      } else {
+        console.error('selectSkill: Element not found');
+      }
+    },
     createTreeStructure() {
       this.treeStructure = [];
       const currentTabName = this.tabs[this.selectedClass][this.selectedTab];
       const treeItems = this.trees[this.selectedClass][currentTabName];
+      console.log(this.selectedClass, this.selectedTab, currentTabName, treeItems);
 
-      for (let y = 0; y < 7; y++) {
+      for (let y = 0; y < 7; y++) { // Tree Columns
         const row = [];
-        for (let x = 0; x < 10; x++) {
+        for (let x = 0; x < 10; x++) { // Tree Rows
           const skillFound = Object.entries(treeItems)
-            .find((ti) => (
-              parseInt(ti[1].x, 10) === x && parseInt(ti[1].y, 10) === y
+            .filter((tree) => (
+              tree[0] !== 'None'
+              && parseInt(tree[1].x, 10) === x
+              && parseInt(tree[1].y, 10) === y
             ));
+
           if (skillFound) {
             row.push(skillFound);
           } else {
             row.push([]);
           }
         }
+
         this.treeStructure.push(row);
       }
-      this.attachRequiredSkills();
+      console.log('treeStructure:', this.treeStructure);
     },
     attachRequiredSkills() {
       const app = this;
+      console.log('attachRequiredSkills');
 
       this.treeStructure.forEach((row) => {
-        row.forEach(([key, value]) => {
-          if (typeof value === 'object' && value.skill_requirement !== 'none') {
-            console.log(key, value.id);
-            // console.log(key, JSON.parse(value.skill_requirement));
-            // console.log(app.$refs[`skill-${value.id}`]);
+        console.log('row:', row);
+        row.filter((col) => col.length > 0).forEach((col) => {
+          console.log('col:', col);
+          col.filter((skill) => skill[1].skill_requirement !== 'none').forEach((skill) => {
+            const requirements = JSON.parse(skill[1].skill_requirement).sort((a, b) => a - b);
+            console.log(skill[0], skill[1].id);
+            console.log('Requirements:', requirements);
 
-            const requirements = JSON.parse(value.skill_requirement);
-            // console.log('Requirements:', requirements);
+            const start = document.getElementById(`skill-${requirements.join('_')}`);
+            const end = document.getElementById(`skill-${skill[1].id}`);
 
-            requirements.forEach((req) => {
-              const start = app.$refs[`skill-${req}`];
-              // console.log('Start:', start);
+            console.log('Line Points:', start, end);
 
-              if (start) {
-                app.lines.push(LeaderLine.setLine(
-                  start,
-                  app.$refs[`skill-${value.id}`],
-                  { color: '#3498db', path: 'straight', endPlug: 'behind' },
-                ));
-              }
-            });
-          }
+            if (start && end) {
+              const line = LeaderLine.setLine(
+                start,
+                end,
+                { color: '#3498db', path: 'straight', endPlug: 'behind' },
+              );
+              console.log('Line:', line);
+              app.lines.push(line);
+            }
+          });
         });
       });
+      console.log('Lines:', this.lines);
     },
+  },
+  components: {
+    Skill,
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .tree {
-  // background-image: url(../../assets/images/skills_bg.png);
   border-right: 5px dashed rgb(182, 131, 61);
   border-bottom: 5px dashed rgb(182, 131, 61);
   display: flex;
@@ -129,6 +202,16 @@ export default {
   border-left: 2px solid white;
   grid-area: tree;
   z-index: 10;
+  position: relative;
+  user-select: none;
+
+  .context-menu {
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+  }
 
   .row {
     display: flex;
@@ -141,25 +224,6 @@ export default {
       justify-content: center;
       align-items: center;
       flex: 1 1 0px;
-
-      div {
-        border: 1px solid white;
-        height: 24px;
-        width: 24px;
-        transform: scale(1.6)
-      }
-
-      .empty-skill {
-        background-position: -3699px -1033px;
-      }
-
-      .empty-heritage {
-        background-position: -2801px -1034px;
-      }
-
-      .empty-passive {
-        background-position: -2182px -1035px;
-      }
     }
   }
 }
