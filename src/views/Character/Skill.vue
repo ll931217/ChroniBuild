@@ -101,8 +101,5 @@ export default {
   .empty-passive {
     background-position: -2182px -1035px;
   }
-
-  .context-menu {
-  }
 }
 </style>
