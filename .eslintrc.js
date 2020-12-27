@@ -16,11 +16,11 @@ module.exports = {
     'no-plusplus': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'import/no-extraneous-dependencies': [
       'error', {
-        'devDependencies': false,
-        'optionalDependencies': false,
-        'peerDependencies': false,
-        'packageDir': './'
-      }
+        devDependencies: false,
+        optionalDependencies: false,
+        peerDependencies: false,
+        packageDir: './',
+      },
     ],
   },
 };

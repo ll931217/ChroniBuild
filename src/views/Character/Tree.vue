@@ -3,11 +3,13 @@
   .row(v-for="(row, rowKey) in treeStructure", :key="rowKey")
     .col(v-for="([key, value], colKey) in row", :key="colKey")
       template(v-if="typeof value === 'object' && key !== 'None'")
-        .skills.empty-skill(v-if="[\
-          'Active Skill',\
-          'Companion Skill',\
-          'Heritage Skill',\
-          ].indexOf(value.type) !== -1", :ref="'skills-' + value.skill_requirement")
+        .skills.empty-skill(
+          v-if="[\
+            'Active Skill',\
+            'Companion Skill',\
+            'Heritage Skill',\
+          ].indexOf(value.type) !== -1",
+          :ref="'skills-' + value.skill_requirement")
         .skills(v-else, :class="key", :ref="'skill-' + parseInt(value.id, 10)") {{ value.id }}
 </template>
 
@@ -47,20 +49,17 @@ export default {
       this.lines.forEach((line) => line.remove());
 
       this.createTreeStructure();
-      this.attachRequiredSkills();
     },
     selectedTab(val) {
       console.log('Tab changed:', val);
       this.lines.forEach((line) => line.remove());
 
       this.createTreeStructure();
-      this.attachRequiredSkills();
     },
   },
   mounted() {
-    console.clear();
+    // console.clear();
     this.createTreeStructure();
-    this.attachRequiredSkills();
   },
   methods: {
     createTreeStructure() {
@@ -83,6 +82,7 @@ export default {
         }
         this.treeStructure.push(row);
       }
+      this.attachRequiredSkills();
     },
     attachRequiredSkills() {
       const app = this;
@@ -91,15 +91,15 @@ export default {
         row.forEach(([key, value]) => {
           if (typeof value === 'object' && value.skill_requirement !== 'none') {
             console.log(key, value.id);
-            console.log(key, JSON.parse(value.skill_requirement));
-            console.log(app.$refs[`skill-${value.id}`]);
+            // console.log(key, JSON.parse(value.skill_requirement));
+            // console.log(app.$refs[`skill-${value.id}`]);
 
             const requirements = JSON.parse(value.skill_requirement);
-            console.log('Requirements:', requirements);
+            // console.log('Requirements:', requirements);
 
             requirements.forEach((req) => {
               const start = app.$refs[`skill-${req}`];
-              console.log('Start:', start);
+              // console.log('Start:', start);
 
               if (start) {
                 app.lines.push(LeaderLine.setLine(
