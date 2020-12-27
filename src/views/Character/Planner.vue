@@ -164,11 +164,11 @@ export default {
   background-image: url(../../assets/images/skills_bg.png);
   display: grid;
   height: 400px;
-  grid-template-columns: 3fr 2fr 4fr;
+  grid-template-columns: 3fr repeat(3, 2fr);
   grid-template-rows: 85px auto;
   grid-template-areas:
-    "stats header header"
-    "stats gears tree";
+    "stats header header header"
+    "stats gears tree tree";
 
   .disabled {
     filter: brightness(.4);
@@ -193,13 +193,13 @@ export default {
     border-left: 5px dashed rgb(182, 131, 61);
     border-top: 5px dashed rgb(182, 131, 61);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 4fr 1fr 1fr 4fr;
     grid-template-areas:
-      "selected selection details"
-      "selected selection details"
-      "selected . ."
-      "selected tree-list .";
+      "selected selected selected selection selection details details"
+      "selected selected selected selection selection details details"
+      "selected selected selected . . . ."
+      "selected selected selected tree-list . . .";
 
     .selected-class {
       grid-area: selected;
