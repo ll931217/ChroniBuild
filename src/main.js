@@ -3,7 +3,6 @@ import Vue from 'vue';
 import Buefy from 'buefy';
 // import 'buefy/dist/buefy.css';
 import '@/assets/sass/styles.scss';
-import CKEditor from '@ckeditor/ckeditor5-vue';
 import TreeView from '@ll931217/vue-treeview';
 
 import App from './App.vue';
@@ -16,7 +15,6 @@ import changeTitleMixin from './mixins/changeTitle';
 Vue.config.productionTip = false;
 
 Vue.use(Buefy);
-Vue.use(CKEditor);
 Vue.use(TreeView);
 
 Vue.mixin(changeTitleMixin);

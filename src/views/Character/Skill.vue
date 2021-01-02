@@ -9,7 +9,10 @@
       :id="'skill-' + skills[0][1].id",
       :data-row="row",
       :data-col="col",
-      :data-requirement="skills[0][1].skill_requirement"
+      :data-requirement="skills[0][1].skill_requirement",
+      @mousemove="onMousemove",
+      @mouseover="$emit('toggleSkillSelect', true)",
+      @mouseleave="$emit('toggleSkillSelect', false)",
     ) {{ skills[0][1].id }}
   template(v-else)
     .skills.empty-skill(
@@ -22,7 +25,9 @@
       :data-row="row",
       :data-col="col",
       @click="showCoords(skills.map((c) => parseInt(c[1].id)).sort((a, b) => a - b).join('_'))",
-      @contextmenu.prevent="selectSkill(skills.map((c) => parseInt(c[1].id)))"
+      @contextmenu.prevent="selectSkill(skills.map((c) => parseInt(c[1].id)))",
+      @mouseover="$emit('toggleSkillSelect', true)",
+      @mouseleave="$emit('toggleSkillSelect', false)",
     )
 </template>
 
@@ -50,8 +55,19 @@ export default {
       type: Number,
       default: 0,
     },
+    mouseMove: {
+      type: Function,
+      default: () => {},
+    },
+    toggleSkillSelect: {
+      type: Function,
+      default: () => false,
+    },
   },
   methods: {
+    onMousemove(event) {
+      this.$emit('mousemove', event);
+    },
     showCoords(id) {
       const ele = document.getElementById(`skill-${id}`);
       const position = ele.getBoundingClientRect();

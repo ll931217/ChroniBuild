@@ -1,7 +1,7 @@
 <template lang="pug">
-.tree(:class="tabs[selectedClass][selectedTab]", @mouseover="treeHover")
-  .context-menu(ref="context-menu")
-    h1 Context Menu
+.tree(:class="tabs[selectedClass][selectedTab]")
+  .skill-select(ref="skill-select", v-show="skillSelectShow")
+    h1 Skill Select Menu
   .row(v-for="(row, rowKey) in treeStructure", :key="rowKey")
     .col(v-for="(col, colKey) in row", :key="colKey")
       template(v-if="col.length > 0")
@@ -11,6 +11,8 @@
           :row="rowKey",
           :col="colKey",
           :tree="treeStructure",
+          @mousemove="mouseMove",
+          @toggleSkillSelect="toggleSkillSelect"
         )
 </template>
 
@@ -39,6 +41,7 @@ export default {
   data: () => ({
     treeStructure: [],
     lines: [],
+    skillSelectShow: false,
   }),
   computed: {
     ...mapGetters([
@@ -62,14 +65,13 @@ export default {
       }
     },
     selectedTab(val) {
-      console.log('Tab changed:', val);
       const app = this;
 
       this.lines.forEach((line) => line.remove());
       this.lines.length = 0;
 
       this.createTreeStructure();
-      if (this.selectedTab !== 4) {
+      if (val !== 4) {
         setTimeout(() => {
           app.attachRequiredSkills();
         }, 500);
@@ -77,7 +79,6 @@ export default {
     },
   },
   mounted() {
-    console.clear();
     const app = this;
 
     this.createTreeStructure();
@@ -88,24 +89,18 @@ export default {
     }
   },
   methods: {
-    treeHover(event) {
+    mouseMove(event) {
       const tree = document.querySelector('.tree');
-      console.clear();
-      console.log('treeHover[event.clientX]:', event.clientX);
-      console.log('treeHover[event.clientY]:', event.clientY);
+      const rect = tree.getBoundingClientRect();
 
-      console.log('tree[width]:', tree.offsetWidth);
-      console.log('tree[height]:', tree.offsetHeight);
+      const x = `${event.clientX - rect.x}px`;
+      const y = `${event.clientY - rect.y}px`;
 
-      const x = `${event.clientX - tree.offsetWidth}px`;
-      const y = `${event.clientY - tree.offsetHeight}px`;
-
-      this.$refs['context-menu'].style.left = x;
-      this.$refs['context-menu'].style.top = y;
-      console.log('x:', x);
-      console.log('y:', y);
-      console.log('context-menu[style.top]:', this.$refs['context-menu'].style.top);
-      console.log('context-menu[style.left]:', this.$refs['context-menu'].style.left);
+      this.$refs['skill-select'].style.left = x;
+      this.$refs['skill-select'].style.top = y;
+    },
+    toggleSkillSelect(state) {
+      this.skillSelectShow = state;
     },
     selectSkill(skillIDs) {
       const eleID = `skill-${skillIDs.sort((a, b) => a - b).join('_')}`;
@@ -129,7 +124,6 @@ export default {
       this.treeStructure = [];
       const currentTabName = this.tabs[this.selectedClass][this.selectedTab];
       const treeItems = this.trees[this.selectedClass][currentTabName];
-      console.log(this.selectedClass, this.selectedTab, currentTabName, treeItems);
 
       for (let y = 0; y < 7; y++) { // Tree Columns
         const row = [];
@@ -150,25 +144,17 @@ export default {
 
         this.treeStructure.push(row);
       }
-      console.log('treeStructure:', this.treeStructure);
     },
     attachRequiredSkills() {
       const app = this;
-      console.log('attachRequiredSkills');
 
       this.treeStructure.forEach((row) => {
-        console.log('row:', row);
         row.filter((col) => col.length > 0).forEach((col) => {
-          console.log('col:', col);
           col.filter((skill) => skill[1].skill_requirement !== 'none').forEach((skill) => {
             const requirements = JSON.parse(skill[1].skill_requirement).sort((a, b) => a - b);
-            console.log(skill[0], skill[1].id);
-            console.log('Requirements:', requirements);
 
             const start = document.getElementById(`skill-${requirements.join('_')}`);
             const end = document.getElementById(`skill-${skill[1].id}`);
-
-            console.log('Line Points:', start, end);
 
             if (start && end) {
               const line = LeaderLine.setLine(
@@ -176,13 +162,11 @@ export default {
                 end,
                 { color: '#3498db', path: 'straight', endPlug: 'behind' },
               );
-              console.log('Line:', line);
               app.lines.push(line);
             }
           });
         });
       });
-      console.log('Lines:', this.lines);
     },
   },
   components: {
@@ -205,7 +189,7 @@ export default {
   position: relative;
   user-select: none;
 
-  .context-menu {
+  .skill-select {
     background-color: rgba($color: #000000, $alpha: 0.5);
     position: absolute;
     top: 0;

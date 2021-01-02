@@ -49,7 +49,10 @@
     .columns.is-centered
       .column
         h1.title.is-1.has-text-white.mb-0.ml-3 Guide
-        ckeditor(:editor="editor", v-model="editorData", :config="editorConfig")
+        textarea.textarea.has-fixed-size.guide-textarea(
+          placeholder="Type your guide here",
+          v-model="guide"
+        )
     .columns.is-centered
       .column
         b-button(type="is-success", @click="exportData()") Export
@@ -77,45 +80,14 @@ export default {
   data: () => ({
     selectedClass: '',
     selectedDifficulty: '',
+    selectedTree: {},
     selectedTab: 0,
+    guide: '',
     tabs: {
       Templar: ['Vengeance', 'Wrath', 'Conviction', 'Redemption', 'Mastery'],
       Berserker: ['Guardian', 'Sky Lord', 'Dragonkin', 'Frostborn', 'Mastery'],
       Warden: ['Wind Ranger', 'Druid', 'Storm Caller', 'Winter Herald', 'Mastery'],
       Warlock: ['Corruptor', 'Lich', 'Demonologist', 'Reaper', 'Mastery'],
-    },
-    editor: ClassicEditor,
-    editorData: '<p>Content of the editor</p>',
-    editorConfig: {
-      fontFamily: {
-        options: [
-          'default',
-          'Ubuntu, Arial, sans-serif',
-          'Ubuntu Mono, Courier New, Courier, monospace',
-        ],
-      },
-      fontColor: {
-        colors: ['#2f3640', '#487eb0', '#4cd137', '#fbc531', '#9c88ff', '#00a8ff', '#e84118'],
-      },
-      toolbar: [
-        'Heading',
-        'Bold',
-        'Italic',
-        'Link',
-        'bulletedList',
-        'numberedList',
-        'Indent',
-        'FontFamily',
-        'EasyImage',
-        'Image',
-        'ImageCaption',
-        'ImageStyle',
-        'ImageToolbar',
-        'ImageUpload',
-        'MediaEmbed',
-        'Undo',
-        'Redo',
-      ],
     },
   }),
   watch: {
@@ -126,6 +98,7 @@ export default {
         } else {
           this.pickClass(val);
         }
+        this.selectedTree = this.trees[this.selectedClass];
       },
       immediate: true,
     },
@@ -190,6 +163,12 @@ export default {
 
 .select:not(.is-multiple):not(.is-loading)::after {
   border-color: yellow;
+}
+
+.guide-textarea {
+  background-color: rgba($color: #bbb, $alpha: 1.0);
+  height: 300px;
+  width: 100%;
 }
 
 .character {
