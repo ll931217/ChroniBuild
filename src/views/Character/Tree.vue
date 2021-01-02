@@ -86,6 +86,25 @@ export default {
     }
   },
   methods: {
+    treeHover(event) {
+      const tree = document.querySelector('.tree');
+      console.clear();
+      console.log('treeHover[event.clientX]:', event.clientX);
+      console.log('treeHover[event.clientY]:', event.clientY);
+
+      console.log('tree[width]:', tree.offsetWidth);
+      console.log('tree[height]:', tree.offsetHeight);
+
+      const x = `${event.clientX - tree.offsetWidth}px`;
+      const y = `${event.clientY - tree.offsetHeight}px`;
+
+      this.$refs['context-menu'].style.left = x;
+      this.$refs['context-menu'].style.top = y;
+      console.log('x:', x);
+      console.log('y:', y);
+      console.log('context-menu[style.top]:', this.$refs['context-menu'].style.top);
+      console.log('context-menu[style.left]:', this.$refs['context-menu'].style.left);
+    },
     selectSkill(skillIDs) {
       const eleID = `skill-${skillIDs.sort((a, b) => a - b).join('_')}`;
       const ele = document.getElementById(eleID);
@@ -181,6 +200,16 @@ export default {
   border-left: 2px solid white;
   grid-area: tree;
   z-index: 10;
+  position: relative;
+  user-select: none;
+
+  .context-menu {
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+  }
 
   .row {
     display: flex;

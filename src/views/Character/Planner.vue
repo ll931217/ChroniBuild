@@ -46,13 +46,13 @@
               )
           Tree(:selectedClass="selectedClass", :selectedTab="selectedTab", :tabs="tabs")
 
-    //- .columns.is-centered
-    //-   .column
-    //-     h1.title.is-1.has-text-white.mb-0.ml-3 Guide
-    //-     #editorjs
-    //- .columns.is-centered
-    //-   .column
-    //-     b-button(type="is-success", @click="exportData()") Export
+    .columns.is-centered
+      .column
+        h1.title.is-1.has-text-white.mb-0.ml-3 Guide
+        ckeditor(:editor="editor", v-model="editorData", :config="editorConfig")
+    .columns.is-centered
+      .column
+        b-button(type="is-success", @click="exportData()") Export
 </template>
 
 <script>
@@ -84,7 +84,39 @@ export default {
       Warden: ['Wind Ranger', 'Druid', 'Storm Caller', 'Winter Herald', 'Mastery'],
       Warlock: ['Corruptor', 'Lich', 'Demonologist', 'Reaper', 'Mastery'],
     },
-    // editor: null,
+    editor: ClassicEditor,
+    editorData: '<p>Content of the editor</p>',
+    editorConfig: {
+      fontFamily: {
+        options: [
+          'default',
+          'Ubuntu, Arial, sans-serif',
+          'Ubuntu Mono, Courier New, Courier, monospace',
+        ],
+      },
+      fontColor: {
+        colors: ['#2f3640', '#487eb0', '#4cd137', '#fbc531', '#9c88ff', '#00a8ff', '#e84118'],
+      },
+      toolbar: [
+        'Heading',
+        'Bold',
+        'Italic',
+        'Link',
+        'bulletedList',
+        'numberedList',
+        'Indent',
+        'FontFamily',
+        'EasyImage',
+        'Image',
+        'ImageCaption',
+        'ImageStyle',
+        'ImageToolbar',
+        'ImageUpload',
+        'MediaEmbed',
+        'Undo',
+        'Redo',
+      ],
+    },
   }),
   watch: {
     selectedClass: {
@@ -164,11 +196,11 @@ export default {
   background-image: url(../../assets/images/skills_bg.png);
   display: grid;
   height: 400px;
-  grid-template-columns: 3fr 2fr 4fr;
+  grid-template-columns: 3fr repeat(3, 2fr);
   grid-template-rows: 85px auto;
   grid-template-areas:
-    "stats header header"
-    "stats gears tree";
+    "stats header header header"
+    "stats gears tree tree";
 
   .disabled {
     filter: brightness(.4);
@@ -193,13 +225,13 @@ export default {
     border-left: 5px dashed rgb(182, 131, 61);
     border-top: 5px dashed rgb(182, 131, 61);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 4fr 1fr 1fr 4fr;
     grid-template-areas:
-      "selected selection details"
-      "selected selection details"
-      "selected . ."
-      "selected tree-list .";
+      "selected selected selected selection selection details details"
+      "selected selected selected selection selection details details"
+      "selected selected selected . . . ."
+      "selected selected selected tree-list . . .";
 
     .selected-class {
       grid-area: selected;
