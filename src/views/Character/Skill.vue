@@ -20,6 +20,7 @@
         'Active Skill',\
         'Companion Skill',\
         'Heritage Skill',\
+        'Ultimate Skill',\
       ].indexOf(skills[0][1].type) !== -1",
       :id="'skill-' + skills.map((c) => parseInt(c[1].id)).sort((a, b) => a - b).join('_')",
       :data-row="row",
@@ -99,6 +100,8 @@ export default {
 
 <style lang="scss">
 .skill-comp {
+  position: relative;
+
   div {
     border: 1px solid white;
     height: 24px;
@@ -116,6 +119,13 @@ export default {
 
   .empty-passive {
     background-position: -2182px -1035px;
+  }
+
+  .context-menu {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    width: 80px;
   }
 }
 </style>
