@@ -1,7 +1,5 @@
 <template lang="pug">
 .tree(:class="tabs[selectedClass][selectedTab]")
-  .context-menu
-    h1 Context Menu
   .row(v-for="(row, rowKey) in treeStructure", :key="rowKey")
     .col(v-for="(col, colKey) in row", :key="colKey")
       template(v-if="col.length > 0")
