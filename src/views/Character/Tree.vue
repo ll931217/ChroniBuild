@@ -151,7 +151,7 @@ export default {
       this.treeStructure.forEach((row) => {
         row.filter((col) => col.length > 0).forEach((col) => {
           col.filter((skill) => skill[1].skill_requirement !== 'none').forEach((skill) => {
-            const requirements = JSON.parse(skill[1].skill_requirement).sort((a, b) => a - b);
+            const requirements = skill[1].skill_requirement.sort((a, b) => a - b);
 
             const start = document.getElementById(`skill-${requirements.join('_')}`);
             const end = document.getElementById(`skill-${skill[1].id}`);

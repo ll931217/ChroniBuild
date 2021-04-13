@@ -9,10 +9,10 @@
       :id="'skill-' + skills[0][1].id",
       :data-row="row",
       :data-col="col",
-      :data-requirement="skills[0][1].skill_requirement",
+      :data-requirement="skills[0][1].skillRequirement",
       @mousemove="onMousemove",
       @mouseover="$emit('toggleSkillSelect', true)",
-      @mouseleave="$emit('toggleSkillSelect', false)",
+      @mouseleave="$emit('toggleSkillSelect', false)"
     ) {{ skills[0][1].id }}
   template(v-else)
     .skills.empty-skill(
@@ -28,7 +28,7 @@
       @click="showCoords(skills.map((c) => parseInt(c[1].id)).sort((a, b) => a - b).join('_'))",
       @contextmenu.prevent="selectSkill(skills.map((c) => parseInt(c[1].id)))",
       @mouseover="$emit('toggleSkillSelect', true)",
-      @mouseleave="$emit('toggleSkillSelect', false)",
+      @mouseleave="$emit('toggleSkillSelect', false)"
     )
 </template>
 

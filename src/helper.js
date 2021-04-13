@@ -8,31 +8,31 @@ export const convert = (level, classColor, data, text) => {
   let desc = text;
 
   if (/(DAMAGE%)/.test(desc)) {
-    desc = desc.replace(/(DAMAGE%)/, data.damage.split(',')[level - 1]);
+    desc = desc.replace(/(DAMAGE%)/, data.damage[level - 1]);
   }
 
   if (/(EFFECT)/.test(desc)) {
-    desc = desc.replace(/(EFFECT)/, data.effect.split(',')[level - 1]);
+    desc = desc.replace(/(EFFECT)/, data.effect[level - 1]);
   }
 
   if (/(PROC)/.test(desc)) {
-    desc = desc.replace(/(PROC)/, data.proc.split(',')[level - 1]);
+    desc = desc.replace(/(PROC)/, data.proc[level - 1]);
   }
 
   if (/(DURATION)/.test(desc)) {
-    desc = desc.replace(/(DURATION)/, data.duration.split(',')[level - 1]);
+    desc = desc.replace(/(DURATION)/, data.duration[level - 1]);
   }
 
   if (/(VALUE)/.test(desc)) {
-    desc = desc.replace(/(VALUE)/, data.value.split(',')[level - 1]);
+    desc = desc.replace(/(VALUE)/, data.value[level - 1]);
   }
 
   if (/(REQUIRED)/.test(desc)) {
-    desc = desc.replace(/(REQUIRED)/, data.required.split(',')[level - 1]);
+    desc = desc.replace(/(REQUIRED)/, data.required[level - 1]);
   }
 
   if (/(RANGE)/.test(desc)) {
-    desc = desc.replace(/(RANGE)/, data.range.split(',')[level - 1]);
+    desc = desc.replace(/(RANGE)/, data.range[level - 1]);
   }
 
   if (/(XDAM)/.test(desc)) {

@@ -121,6 +121,7 @@ export default {
       'points',
       'settings',
       'trees',
+      'export',
     ]),
   },
   methods: {
@@ -130,7 +131,11 @@ export default {
       'restoreDifficulty',
     ]),
     async exportData() {
-      console.log(await this.editor.save());
+      // console.log(await this.editor.save());
+      const hashed = this.export;
+      const unhashed = window.atob(hashed);
+      console.log('Hashed:', hashed);
+      console.log('Unhashed:', unhashed);
     },
     selectTab(tab) {
       this.selectSound();
