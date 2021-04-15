@@ -19,7 +19,7 @@
       ).has-text-white Items
       b-navbar-item(
         tag="router-link",
-        :to="{ name: 'Runes' }",
+        :to="{ name: 'Rune' }",
         @mouseover.native="hoverSound()",
         @click.native="selectSound()"
       ).has-text-white Runes

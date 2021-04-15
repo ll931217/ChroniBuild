@@ -16,7 +16,6 @@ const routes = [
   },
   {
     path: '/runes',
-    name: 'Runes',
     component: () => import(/* webpackChunkName: "runes" */ '../views/Runes.vue'),
     children: [
       {

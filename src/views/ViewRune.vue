@@ -1,6 +1,6 @@
 <template lang="pug">
 #view-rune
-  img(:src="getImgUrl(image)")
+  img(v-if="image !== ''", :src="getImgUrl(image)")
 </template>
 
 <script>
