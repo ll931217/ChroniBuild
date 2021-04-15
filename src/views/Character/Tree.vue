@@ -150,8 +150,8 @@ export default {
 
       this.treeStructure.forEach((row) => {
         row.filter((col) => col.length > 0).forEach((col) => {
-          col.filter((skill) => skill[1].skill_requirement !== 'none').forEach((skill) => {
-            const requirements = skill[1].skill_requirement.sort((a, b) => a - b);
+          col.filter((skill) => skill[1].skillRequirement !== 'none').forEach((skill) => {
+            const requirements = skill[1].skillRequirement.sort((a, b) => a - b);
 
             const start = document.getElementById(`skill-${requirements.join('_')}`);
             const end = document.getElementById(`skill-${skill[1].id}`);
