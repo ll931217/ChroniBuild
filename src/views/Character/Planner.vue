@@ -204,7 +204,6 @@ export default {
   .header {
     grid-area: header;
 
-    background-image: url(../../assets/images/skills_bg.png);
     border-right: 5px dashed rgb(182, 131, 61);
     border-left: 5px dashed rgb(182, 131, 61);
     border-top: 5px dashed rgb(182, 131, 61);
