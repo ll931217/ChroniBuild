@@ -2,6 +2,9 @@
 
 > Project still under active development
 
+![image](https://user-images.githubusercontent.com/12750413/115507485-c818a680-a2ae-11eb-8cc5-04a9950b9f76.png)
+**NOTE**: The above image is a work in progress, there is still a lot of missing functionality.
+
 ## Features
 
 - Character planner
